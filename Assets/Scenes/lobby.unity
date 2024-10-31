@@ -225,8 +225,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -381.5, y: -245.75}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -287, y: 166}
+  m_SizeDelta: {x: 324.6946, y: 116.5038}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &491472329
 MonoBehaviour:
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u65E9\u5B89"
+  m_text: "Wille zum Leben\n\u6E2C\u8A66\u7248\u672C 241022a"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 55033e8e3ce9f154a9418f3fdb1f6c07, type: 2}
   m_sharedMaterial: {fileID: 6254114594643070340, guid: 55033e8e3ce9f154a9418f3fdb1f6c07, type: 2}

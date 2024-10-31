@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class All_GameCore : MonoBehaviour
+public class UI_CameraTracker : MonoBehaviour
 {
-    public static int OperatorMode = 0; //0= ³æ¤H 1=Âù¤H
-
     // Start is called before the first frame update
     void Start()
     {
