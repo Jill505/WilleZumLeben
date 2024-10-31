@@ -11,6 +11,9 @@ public class John_Control : MonoBehaviour
 
     public bool johnControlAble = true;
 
+    public GameObject pistolShootSoundEffect;
+
+
     [Range(4f,20f)]public float johnSpeed = 1.0f;
     [Range(2f, 15f)] public float johnMaxmentSpeed = 7f;
     [Range(0.001f, 2f)] public float johnSpeedEndNum=0.2f;
@@ -184,6 +187,8 @@ public class John_Control : MonoBehaviour
         {
             GameObject theBulletSummoned = Instantiate(johnBullet, johnBarrelPosition.transform.position,Quaternion.Euler(0,0, facingDiraction * Mathf.Rad2Deg));
             //johnBullet.transform.rotation = Quaternion.Euler(0, 0, facingDiraction * Mathf.Rad2Deg);
+
+            Instantiate(pistolShootSoundEffect);
         }
     }
 }
