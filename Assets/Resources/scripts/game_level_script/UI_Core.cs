@@ -51,7 +51,7 @@ public class UI_Core : MonoBehaviour
         // 点击测试
         if (Input.GetMouseButtonDown(0))
         {
-            shake(); 
+            //shake(); 
         }
 
         if (isshakeCamera)
@@ -114,7 +114,7 @@ public class UI_Core : MonoBehaviour
     //原文連結：https://blog.csdn.net/yjy99yjy999/article/details/121052210
 
     // 震动标志位
-    [SerializeField] private bool isshakeCamera = false;
+    [SerializeField] bool isshakeCamera = false;
     // 震动幅度
     public float shakeLevel = 3f;
     // 震动时间

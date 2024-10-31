@@ -26,6 +26,15 @@ public class MobBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Test
+
+        //FunctionTest
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            timer = 0;
+            Debug.Log("抽幀");
+        }
+
         TimeCurver();
     }
 
@@ -39,6 +48,7 @@ public class MobBase : MonoBehaviour
         else
         {
             //dead and play special effect
+
             timer = 0;
         }
     }
@@ -55,16 +65,10 @@ public class MobBase : MonoBehaviour
 
     public void TimeCurver()
     {
-        //FunctionTest
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            timer = 0;
-            Debug.Log("抽幀");
-        }
         if (timer > 5)
         {
-            Debug.Log("防止一直卡在time scale <1裡面");
-            Time.timeScale = 1f;
+            //Debug.Log("防止一直卡在time scale <1裡面");
+            //Time.timeScale = 1f;
         }
 
         // 文件自帶筆記=> 计时器控制动画进度，时间会被重置以循环播放

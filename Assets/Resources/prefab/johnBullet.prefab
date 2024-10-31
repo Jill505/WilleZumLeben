@@ -102,6 +102,8 @@ MonoBehaviour:
   rb2d: {fileID: 5862048832174912759}
   bulletSpeed: 25
   bulletDamage: 1
+  cameraOffestStrength: 0.2
+  john: {fileID: 0}
 --- !u!50 &5862048832174912759
 Rigidbody2D:
   serializedVersion: 4
