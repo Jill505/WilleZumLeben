@@ -17,7 +17,7 @@ public class MobBase : MonoBehaviour
     // 影响时间流速的系数
     public float animationDuration = 1f;
 
-    private float timer =  10f;
+    private float timer = 10f;
 
     public GameObject deadSoundEffect;
     public GameObject hitSoundEffect;
@@ -50,6 +50,7 @@ public class MobBase : MonoBehaviour
         {
             //survive
             Instantiate(hitSoundEffect);
+            timer = 0.2f;
         }
         else
         {
@@ -99,12 +100,7 @@ public class MobBase : MonoBehaviour
         {
             float timeScale = timeCurve.Evaluate(progress);
             Time.timeScale = timeScale;
+
         }
-
-        // 文件自帶筆記=> 根据曲线获取当前时间缩放值
-
-
-        // 应用时间缩放到 Time.timeScale 或动画中
     }
-
 }

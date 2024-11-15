@@ -29,6 +29,8 @@ public class John_Control : MonoBehaviour
     public float reloadTime = 0.8f;
     public float reloadNowTime = 0f;
 
+    public float recoli = 0.5f;//0~1 0=完全停止 1=完全無後座力
+    public float recoliRememberMaxSpeed = 7f;
     private void Awake()
     {
         if (level_Core == null)
@@ -39,7 +41,7 @@ public class John_Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        recoliRememberMaxSpeed = johnMaxmentSpeed;
     }
 
     // Update is called once per frame
@@ -189,6 +191,42 @@ public class John_Control : MonoBehaviour
             //johnBullet.transform.rotation = Quaternion.Euler(0, 0, facingDiraction * Mathf.Rad2Deg);
 
             Instantiate(pistolShootSoundEffect);
+
+            //後座力
+
+            //float hitDiraction = Mathf.Atan2(john.transform.position.y - collision.gameObject.transform.position.y, john.transform.position.x - collision.gameObject.transform.position.x) * Mathf.Rad2Deg;
+            float backPushAngle = Mathf.Atan2(gameObject.transform.position.y - worldMousePosition.y, gameObject.transform.position.x - worldMousePosition.x) * Mathf.Rad2Deg;
+            Debug.Log("後座力角度：" + backPushAngle);
+
+            //camera offest
+            float xCom = Mathf.Cos(backPushAngle);
+            float yCom = Mathf.Sin(backPushAngle);
+
+            float sum = Mathf.Abs(xCom) + Mathf.Abs(yCom);
+
+            xCom /= sum;
+            yCom /= sum;
+
+            Debug.Log("後座力 X分量：" + xCom);
+            Debug.Log("後座力 Y分量" + yCom);
+
+            Vector2 backForce = new Vector2(xCom * recoli, yCom * recoli);
+
+            rb2d.velocity  +=backForce;
+            Debug.Log(backForce);
+
+            StartCoroutine(recoilCoroutine(backPushAngle));
+
         }
+    }
+
+    IEnumerator recoilCoroutine(float recoilDiraction)
+    {
+        johnMaxmentSpeed = johnMaxmentSpeed * recoli;
+        yield return new WaitForSeconds(0.12f);
+
+        johnMaxmentSpeed = recoliRememberMaxSpeed;
+
+        yield return null;
     }
 }

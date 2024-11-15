@@ -41,7 +41,7 @@ public class john_bullet : MonoBehaviour
             float hitDiraction = Mathf.Atan2(collision.gameObject.transform.position.y -  john.transform.position.y, collision.gameObject.transform.position.x - john.transform.position.x) * Mathf.Rad2Deg;
             Debug.Log("À»¤¤¨¤«×¡G" + hitDiraction);
 
-            collision.gameObject.GetComponent<MobBase>().deadFromDiraction = 1f;
+            collision.gameObject.GetComponent<MobBase>().deadFromDiraction = hitDiraction;
 
             //camera offest
             GameObject theCamera = GameObject.Find("UICore");
