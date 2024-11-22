@@ -700,7 +700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1177455796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,8 +913,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.02938132
-      value: 0.5223183
+      time: 0.033340976
+      value: 0.5419411
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -922,8 +922,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.16697423
-      value: 0.92934173
+      time: 0.18056218
+      value: 0.84618896
       inSlope: 0.07610144
       outSlope: 0.07610144
       tangentMode: 0
@@ -942,7 +942,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  animationDuration: 1.8
+  animationDuration: 0.8
   deadSoundEffect: {fileID: 9107652110300139137, guid: 02099ec228159dc40a4368e5ae3979b6, type: 3}
   hitSoundEffect: {fileID: 2281027897876956882, guid: 64f05843c22dacd44867f597c3eedc0d, type: 3}
 --- !u!212 &1268735428
@@ -1043,6 +1043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   allowingControlTimeScale: 1
+  uiCore: {fileID: 0}
 --- !u!4 &1629915418
 Transform:
   m_ObjectHideFlags: 0
@@ -1222,8 +1223,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -266.73877, y: -366.0821}
-  m_SizeDelta: {x: 1162.221, y: 212.91}
+  m_AnchoredPosition: {x: -64.398346, y: -179.79669}
+  m_SizeDelta: {x: 738.8613, y: 112.1046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1703565896
 MonoBehaviour:

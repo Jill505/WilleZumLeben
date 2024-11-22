@@ -10,6 +10,8 @@ public class Level_Core : MonoBehaviour
 
     public bool allowingControlTimeScale = true;
 
+    public UI_Core uiCore;
+
 
     // Start is called before the first frame update
     void Start()
