@@ -47,13 +47,17 @@ public class John_Control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (All_GameCore.OperatorMode == 0)//Solo
-        {
-            JohnSoloControl();
-        }
-        else
+        if (johnControlAble)
         {
 
+            if (All_GameCore.OperatorMode == 0)//Solo
+            {
+                JohnSoloControl();
+            }
+            else
+            {
+
+            }
         }
     }
 
