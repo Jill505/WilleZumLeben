@@ -434,6 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogContext: {fileID: 1399440855}
+  diaCore: {fileID: 0}
 --- !u!4 &282387081
 Transform:
   m_ObjectHideFlags: 0
@@ -664,6 +665,116 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428154016}
   m_CullTransparentMesh: 1
+--- !u!1001 &483764815
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4785317521978392422, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_Name
+      value: "DialogObject_\u5C0D\u8A710_1"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1192.6573
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 272.2673
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.0652819
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[0]
+      value: Comm/ClugOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[1]
+      value: Comm/John Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[2]
+      value: "\u6B61\u8FCE\u4F86\u52301-1"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[3]
+      value: "\u9019\u88E1\u662F\u6E2C\u8A66\u95DC\u5361"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[4]
+      value: Comm/May Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[5]
+      value: "\u5728\u95DC\u5361\u4E4B\u4E2D \u4F60\u53EF\u4EE5\u9032\u884C\u4EFB\u610F\u7684\u64CD\u4F5C
+        \u6C92\u6709\u9650\u5236\u6642\u9593"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[6]
+      value: "\u4E0B\u5348\u4E5F\u5728\u6E2C\u8A66"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[8]
+      value: "\u65E9\u5B89\u5B89\u5B89\u5B89\u5B89\u5B89\u5B89\u5B89"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[9]
+      value: "\u5929\u5929\u90FD\u5728\u6E2C\u8A66"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[10]
+      value: "\u751A\u9EBC\u6642\u5019\u624D\u80FD\u812B\u96E2\u6E2C\u8A66\u963F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[11]
+      value: Comm/ClugClose
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[12]
+      value: Comm/DialogEnd
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,7 +877,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4785317521978392422, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
       propertyPath: m_Name
-      value: "DialogObject_\u5C0D\u8A711-1"
+      value: "DialogObject_\u5C0D\u8A71T0"
       objectReference: {fileID: 0}
     - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1425,6 +1536,12 @@ MonoBehaviour:
   animationDuration: 1
   deadSoundEffect: {fileID: 0}
   hitSoundEffect: {fileID: 0}
+  shootingRange: 0
+  lineOfSite: 0
+  fireRate: 0.5
+  nextFireTime: 0
+  bullet: {fileID: 0}
+  barrel: {fileID: 0}
 --- !u!212 &1177455797
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2117,6 +2234,163 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &1756643535
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4785317521978392422, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_Name
+      value: "DialogObject_\u5C0D\u8A710_0"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1192.6573
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 272.2673
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.0652819
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765951099530179002, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.size
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[0]
+      value: Comm/DialogOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[1]
+      value: Comm/ClugOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[2]
+      value: Comm/John Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[3]
+      value: "\u4F60\u5148\u7B49\u4E00\u4E0B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[4]
+      value: Comm/May Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[5]
+      value: "\u55EF\uFF1F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[6]
+      value: Comm/John Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[7]
+      value: "\u4F60\u7684\u610F\u601D\u662F\u8AAA\uFF0C\u6211\u5011\u8981\u9032\u53BB\u88E1\u9762\u80D6\u63CD\u4ED6\u5011\u4E00\u9813"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[8]
+      value: Comm/May Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[9]
+      value: "\u5C0D\u963F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[10]
+      value: "\u4E0D\u7D66\u9EDE\u6559\u8A13\u5B78\u4E0D\u4E56\u7684\uFF0C\u91CC\u6839\u4EBA\u8166\u7B4B\u786C\u5F97\u5F88"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[11]
+      value: Comm/John Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[12]
+      value: "\u4F9D\u7167\u4E0A\u6B21\u7D93\u9A57\uFF0C\u5927\u6982\u7387\u6703\u51FA\u4EBA\u547D?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[13]
+      value: Comm/May Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[14]
+      value: "\u563F\u963F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[15]
+      value: Comm/John Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[16]
+      value: "\u7136\u5F8C\u4F60\u8AAA\u4E00\u5207\u90FD\u53EA\u662F\u70BA\u4E86\u751A\u81F3\u4E0D\u662F\u4E00\u5957\uFF0C\u800C\u662F\u4E00\u5377\u7684\u559C\u5287\u9304\u5F71\u5E36?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[17]
+      value: Comm/May Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[18]
+      value: "\u6709\u4EC0\u9EBC\u554F\u984C\u55CE?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[19]
+      value: Comm/John Speaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[20]
+      value: ......
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[21]
+      value: "\u7576\u6211\u6C92\u554F\uFF0C\u958B\u5DE5\u5427"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[34]
+      value: Comm/ClugClose
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756288299359051584, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
+      propertyPath: dialog.Array.data[35]
+      value: Comm/DialogEnd
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6e45c16c7e1bcd6479837e97026c0683, type: 3}
 --- !u!1 &1876868230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2538,4 +2812,6 @@ SceneRoots:
   - {fileID: 1223579158}
   - {fileID: 1038046849}
   - {fileID: 524657378}
+  - {fileID: 1756643535}
+  - {fileID: 483764815}
   - {fileID: 282387081}

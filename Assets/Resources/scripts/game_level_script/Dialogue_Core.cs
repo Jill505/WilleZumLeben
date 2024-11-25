@@ -64,7 +64,6 @@ public class Dialogue_Core : MonoBehaviour
             case ("Comm/DialogOpen"):
                 Debug.Log("¶}±Ò¹ï¸Ü®Ø");
                 loadNextHanas();
-                DialogEnd();
                 break;
 
             case ("Comm/DialogEnd"):
