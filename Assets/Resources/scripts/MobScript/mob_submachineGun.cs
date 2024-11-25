@@ -6,7 +6,7 @@ public class mob_submachineGun : MobBase
 {
    private Transform John;
    public float shootingRange;
-   public float lineOfSite;
+   public float lineOfDetect;
    public float fireRate = 0.5f;
    public float nextFireTime;
 
@@ -28,7 +28,7 @@ public class mob_submachineGun : MobBase
         // 計算角度
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
-        if (distanceFromPlayer <lineOfSite && distanceFromPlayer>shootingRange)
+        if (distanceFromPlayer <lineOfDetect && distanceFromPlayer>shootingRange)
         {
             transform.position = Vector2.MoveTowards(this.transform.position,John.position,speed*Time.deltaTime);
             // 設置槍的本地旋轉，使槍對著目標玩家
@@ -63,7 +63,7 @@ public class mob_submachineGun : MobBase
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position , lineOfSite);
+        Gizmos.DrawWireSphere(transform.position , lineOfDetect);
         Gizmos.DrawWireSphere(transform.position , shootingRange);
     }
 }
