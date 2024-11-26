@@ -11,12 +11,20 @@ public class Level_Core : MonoBehaviour
     public bool allowingControlTimeScale = true;
 
     public UI_Core uiCore;
+    public Entry_Object entry;
+    public Exit_Object exit;
 
+    public GameObject John;
+    public GameObject May;
 
-    // Start is called before the first frame update
+    public string nextLevelName = "lobby";
+
     void Start()
     {
+        exit.nextLevelName = nextLevelName;
 
+        John.transform.position = entry.subObject_JohnPosition.transform.position;
+        May.transform.position = entry.subObject_MayPotation.transform.position;
     }
 
     // Update is called once per frame
