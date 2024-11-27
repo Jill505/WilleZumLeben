@@ -7,7 +7,7 @@ public class mob_handGun : MobBase
     private Transform John;
    public float shootingRange;
    public float lineOfDetect;
-   public float fireRate = 0.5f;
+   public float fireRate;
    public float nextFireTime;
 
    public GameObject bullet;
@@ -34,9 +34,12 @@ public class mob_handGun : MobBase
         }
         else if(distanceFromPlayer <= shootingRange && nextFireTime <Time.time)
         {
-            rb.rotation = angle;
             Instantiate(bullet,barrel.position,barrel.rotation);
             nextFireTime = Time.time + fireRate;
+        }
+        else if(distanceFromPlayer <= shootingRange)
+        {
+            rb.rotation = angle;
         }
     }
     private void OnDrawGizmosSelected()

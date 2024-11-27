@@ -21,13 +21,14 @@ public class mob_submachineGun : MobBase
         John = GameObject.FindGameObjectWithTag("John").transform;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
         
         // 計算角度
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
+
         if (distanceFromPlayer <lineOfDetect && distanceFromPlayer>shootingRange)
         {
             transform.position = Vector2.MoveTowards(this.transform.position,John.position,speed*Time.deltaTime);
@@ -41,9 +42,12 @@ public class mob_submachineGun : MobBase
         }
         else if(distanceFromPlayer <= shootingRange && nextFireTime <Time.time)
         {
-            rb.rotation = angle;
             StartCoroutine(ShootBullets());
             nextFireTime = Time.time + fireRate;
+        }
+        else if(distanceFromPlayer <= shootingRange)
+        {
+            rb.rotation = angle;
         }
     }
     private IEnumerator ShootBullets()
