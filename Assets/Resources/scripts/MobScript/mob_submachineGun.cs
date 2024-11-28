@@ -7,7 +7,7 @@ public class mob_submachineGun : MobBase
    private Transform John;
    public float shootingRange;
    public float lineOfDetect;
-   public float fireRate = 0.5f;
+   [Range(0.4f,5f)] public float fireRate;
    public float nextFireTime;
 
    public GameObject bullet;
