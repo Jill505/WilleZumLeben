@@ -10,6 +10,8 @@ public class mob_submachineGun : MobBase
    public float shootingRange;
    public float hearingRange ;
    public float lineOfDetect;
+   public float bulletCount = 10; // 要連續發射的子彈數量
+   public float interval = 0.1f; // 每顆子彈之間的時間間隔
    [Range(0.4f,5f)] public float fireRate;
    public float nextFireTime;
    public float recoilForce = 5f;     // 後座力大小
@@ -83,8 +85,6 @@ public class mob_submachineGun : MobBase
     
     private IEnumerator ShootBullets()
 {
-    int bulletCount = 5; // 要連續發射的子彈數量
-    float interval = 0.1f; // 每顆子彈之間的時間間隔
 
     for (int i = 0; i < bulletCount; i++)
     {

@@ -196,9 +196,11 @@ MonoBehaviour:
   shootingRange: 3.67
   hearingRange: 15.32
   lineOfDetect: 5.68
-  fireRate: 1.5
+  bulletCount: 10
+  interval: 0.1
+  fireRate: 3
   nextFireTime: 0
-  recoilForce: 2
+  recoilForce: 1.5
   recoilDuration: 0.2
   bullet: {fileID: 6715737974044998931, guid: 744cbaeddcbe0684dbd6953957261a2e, type: 3}
   barrel: {fileID: 443605176767365505}
