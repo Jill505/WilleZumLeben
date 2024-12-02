@@ -136,7 +136,7 @@ public class Dialogue_Core : MonoBehaviour
     void Start()
     {
         //startDialog();
-        //DialogEnd();
+        DialogEnd();
     }
 
     // Update is called once per frame

@@ -54,9 +54,9 @@ public class John_Control : MonoBehaviour
             {
                 JohnSoloControl();
             }
-            else
+            else if(All_GameCore.OperatorMode == 1)//¨â­Óª±®a
             {
-
+                JohnSoloControl();
             }
         }
     }

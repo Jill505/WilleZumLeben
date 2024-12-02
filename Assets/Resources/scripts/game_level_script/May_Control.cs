@@ -11,9 +11,16 @@ public class May_Control : MonoBehaviour
     public Vector2 targetPos;
     public Rigidbody2D rb2d;
 
+    public bool mayControlalbe = true;
+
     public bool moveMissionActing = false;
 
     [Range(0.5f,20f)]public float maySpeed = 8;
+
+    public GameObject johnObject;
+
+    public float fallowRadis = 2f;
+    public bool isTracking;
 
     private void Awake()
     {
@@ -74,6 +81,20 @@ public class May_Control : MonoBehaviour
             //Vector2 theVec = (Vector2)gameObject.transform.position - targetPos;
             //float diraction = Mathf.Atan2(theVec.y, theVec.x);
             //rb2d.velocity = targetPos * maySpeed;
+        }
+    }
+
+    public void dulControl()
+    {
+
+    }
+
+    public void following()
+    {
+        if (Vector2.Distance(gameObject.transform.position, johnObject.transform.position) > fallowRadis && isTracking == true)
+        {
+            //diraction分量取得 並朝該方向前進
+
         }
     }
 }
