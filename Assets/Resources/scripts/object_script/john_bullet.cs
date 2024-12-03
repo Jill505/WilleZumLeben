@@ -33,13 +33,13 @@ public class john_bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Mob")
         {
-            //©R¤¤mob ¨Ã¥Bmob¦º¤`
-            //Ä²µo°Êµe ­pºâ¨âªÌ¨¤«×¨Ã²£¥Í¸I¼²°Êµe
+            //ï¿½Rï¿½ï¿½mob ï¿½Ã¥Bmobï¿½ï¿½ï¿½`
+            //Ä²ï¿½oï¿½Êµe ï¿½pï¿½ï¿½ï¿½Ì¨ï¿½ï¿½×¨Ã²ï¿½ï¿½Í¸Iï¿½ï¿½ï¿½Êµe
             collision.gameObject.GetComponent<MobBase>().GetInjured(bulletDamage);
 
             //float hitDiraction = Mathf.Atan2(john.transform.position.y - collision.gameObject.transform.position.y, john.transform.position.x - collision.gameObject.transform.position.x) * Mathf.Rad2Deg;
             float hitDiraction = Mathf.Atan2(collision.gameObject.transform.position.y -  john.transform.position.y, collision.gameObject.transform.position.x - john.transform.position.x) * Mathf.Rad2Deg;
-            Debug.Log("À»¤¤¨¤«×¡G" + hitDiraction);
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¡G" + hitDiraction);
 
             collision.gameObject.GetComponent<MobBase>().deadFromDiraction = hitDiraction;
 
@@ -53,8 +53,8 @@ public class john_bullet : MonoBehaviour
             xCom /= sum;
             yCom /= sum;
 
-            Debug.Log("X¤À¶q¡G" +xCom);
-            Debug.Log("Y¤À¶q" + yCom);
+            Debug.Log("Xï¿½ï¿½ï¿½qï¿½G" +xCom);
+            Debug.Log("Yï¿½ï¿½ï¿½q" + yCom);
 
             theCamera.transform.position += new Vector3(yCom,xCom,0) * cameraOffestStrength;
 
@@ -63,7 +63,7 @@ public class john_bullet : MonoBehaviour
 
         if (collision.gameObject.tag == "Wall")
         {
-            //¤l¼u¯}Ãa
+            //ï¿½lï¿½uï¿½}ï¿½a
         }
         
         if (collision.gameObject.tag == "")
