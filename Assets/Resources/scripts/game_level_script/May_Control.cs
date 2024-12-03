@@ -16,6 +16,10 @@ public class May_Control : MonoBehaviour
     public bool moveMissionActing = false;
 
     [Range(0.5f,20f)]public float maySpeed = 8;
+    public float mayASpeed = 0.4f;
+    public float mayDeASpeed = 1f;
+    public Vector2 mayVectorSpeed;
+    public float mayEndSpeed = 0.3f;
 
     public GameObject johnObject;
 
@@ -40,7 +44,8 @@ public class May_Control : MonoBehaviour
     {
         if (All_GameCore.OperatorMode == 0)//Solo
         {
-            soloTargetPos();
+            //soloTargetPos();
+            following();
         }
         else
         {
@@ -91,10 +96,127 @@ public class May_Control : MonoBehaviour
 
     public void following()
     {
+        // 計算方向單位向量
+        Vector2 direction = (johnObject.transform.position - gameObject.transform.position).normalized;
+
+        // 檢查距離是否大於跟隨半徑
+        if (Vector2.Distance(gameObject.transform.position, johnObject.transform.position) > fallowRadis && isTracking)
+        {
+            // 加速
+            if (Mathf.Abs(mayVectorSpeed.x) < maySpeed)
+            {
+                mayVectorSpeed.x += direction.x * mayASpeed * Time.deltaTime;
+            }
+            if (Mathf.Abs(mayVectorSpeed.y) < maySpeed)
+            {
+                mayVectorSpeed.y += direction.y * mayASpeed * Time.deltaTime;
+            }
+
+            // 設置剛體速度
+            rb2d.velocity = mayVectorSpeed;
+        }
+        else
+        {
+            // 減速
+            if (Mathf.Abs(mayVectorSpeed.x) > mayEndSpeed)
+            {
+                mayVectorSpeed.x -= Mathf.Sign(mayVectorSpeed.x) * mayDeASpeed * Time.deltaTime;
+                if (Mathf.Abs(mayVectorSpeed.x) < mayEndSpeed)
+                {
+                    mayVectorSpeed.x = 0; // 停止
+                }
+            }
+            else
+            {
+                mayVectorSpeed.x = 0;
+            }
+
+            if (Mathf.Abs(mayVectorSpeed.y) > mayEndSpeed)
+            {
+                mayVectorSpeed.y -= Mathf.Sign(mayVectorSpeed.y) * mayDeASpeed * Time.deltaTime;
+                if (Mathf.Abs(mayVectorSpeed.y) < mayEndSpeed)
+                {
+                    mayVectorSpeed.y = 0; // 停止
+                }
+            }
+            else
+            {
+                mayVectorSpeed.y = 0;
+            }
+
+            // 設置剛體速度
+            rb2d.velocity = mayVectorSpeed;
+        }
+
+
+
+
+
+        /*
+        float deg = Mathf.Atan2(gameObject.transform.position.y - johnObject.transform.position.y, gameObject.transform.position.x - johnObject.transform.position.x) * Mathf.Rad2Deg;
+
+        float xCom = Mathf.Sin(deg);
+        float yCom = Mathf.Cos(deg);
+
+        float sum = Mathf.Abs(xCom + yCom);
+
+        xCom = xCom / sum;
+        yCom = yCom / sum;
+        //二分量
+
         if (Vector2.Distance(gameObject.transform.position, johnObject.transform.position) > fallowRadis && isTracking == true)
         {
-            //diraction分量取得 並朝該方向前進
+            if (Mathf.Abs(mayVectorSpeed.x) < maySpeed)
+            {
+                mayVectorSpeed.x += xCom* mayASpeed * Time.deltaTime;
+            }
+            if (Mathf.Abs(mayVectorSpeed.y) < maySpeed)
+            {
+                mayVectorSpeed.y += yCom * mayASpeed * Time.deltaTime;
+            }
 
+            rb2d.velocity = mayVectorSpeed;
         }
+        else
+        {
+            //Speed decrease
+            if (Mathf.Abs(mayVectorSpeed.x) > mayEndSpeed)
+            {
+                if (mayVectorSpeed.x > 0)
+                {
+                    // - 
+                    mayVectorSpeed.x -= mayDeASpeed * Time.deltaTime;
+                }
+                else
+                {
+                    // + 
+                    mayVectorSpeed.x += mayDeASpeed * Time.deltaTime;
+                }
+            }
+            else
+            {
+                mayVectorSpeed.x = 0;
+            }
+
+            if (Mathf.Abs(mayVectorSpeed.y) > mayEndSpeed)
+            {
+                if (mayVectorSpeed.y > 0)
+                {
+                    // - 
+                    mayVectorSpeed.y -= mayDeASpeed * Time.deltaTime;
+                }
+                else
+                {
+                    // + 
+                    mayVectorSpeed.y += mayDeASpeed * Time.deltaTime;
+                }
+            }
+            else
+            {
+                mayVectorSpeed.y = 0;
+            }
+
+            rb2d.velocity = mayVectorSpeed;
+        }*/
     }
 }
