@@ -1890,7 +1890,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5660505668209185151, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
       propertyPath: maySpeed
-      value: 4.5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660505668209185151, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
+      propertyPath: mayASpeed
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5660505668209185151, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
       propertyPath: isTracking
@@ -1900,6 +1904,18 @@ PrefabInstance:
       propertyPath: johnObject
       value: 
       objectReference: {fileID: 660997457}
+    - target: {fileID: 5660505668209185151, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
+      propertyPath: fallowRadis
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660505668209185151, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
+      propertyPath: mayDeASpeed
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660505668209185151, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
+      propertyPath: mayEndSpeed
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8807386096950393978, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
       propertyPath: m_Name
       value: May
