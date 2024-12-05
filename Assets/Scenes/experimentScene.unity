@@ -1263,9 +1263,12 @@ MonoBehaviour:
   deadSoundEffect: {fileID: 0}
   hitSoundEffect: {fileID: 0}
   shootingRange: 0
-  lineOfSite: 0
+  hearingRange: 0
+  lineOfDetect: 0
   fireRate: 0.5
   nextFireTime: 0
+  recoilForce: 5
+  recoilDuration: 0.5
   bullet: {fileID: 0}
   barrel: {fileID: 0}
 --- !u!212 &1177455797
@@ -2705,6 +2708,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5660505668209185151, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
+      propertyPath: johnObject
+      value: 
+      objectReference: {fileID: 660997457}
     - target: {fileID: 8807386096950393978, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
       propertyPath: m_Name
       value: May
