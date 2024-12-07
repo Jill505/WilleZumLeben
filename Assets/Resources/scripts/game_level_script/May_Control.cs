@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +27,20 @@ public class May_Control : MonoBehaviour
     public float fallowRadis = 2f;
     public bool isTracking;
 
+    public bool mayAiming = false;
+
+    //caling variable
+    public float mayDashForce = 15f;
+    public float mayDirection;
+    public float mayReadDashForce = 1f;
+    public float mayDashConst = 1f;
+    public float mayDashPointerExtendConst = 1f;
+    public float mayDashPointerExtendMax = 2.2f;
+    public float mayDashMaxForce = 15f;
+    public GameObject mayPointer;
+    public float mayAimingTimeScale = 0.8f;
+
+
     private void Awake()
     {
         if (level_Core == null)
@@ -36,7 +51,7 @@ public class May_Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -46,6 +61,7 @@ public class May_Control : MonoBehaviour
         {
             //soloTargetPos();
             following();
+            MaySoloAttack();
         }
         else
         {
@@ -148,10 +164,6 @@ public class May_Control : MonoBehaviour
             rb2d.velocity = mayVectorSpeed;
         }
 
-
-
-
-
         /*
         float deg = Mathf.Atan2(gameObject.transform.position.y - johnObject.transform.position.y, gameObject.transform.position.x - johnObject.transform.position.x) * Mathf.Rad2Deg;
 
@@ -218,5 +230,61 @@ public class May_Control : MonoBehaviour
 
             rb2d.velocity = mayVectorSpeed;
         }*/
+    }
+
+    public void MaySoloAttack()
+    {
+        if (mayControlalbe)//可操作 而且怒氣大於消耗
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                mayAiming = true;
+
+                Vector2 mousePosition = Input.mousePosition;
+                Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+                mayDirection = Mathf.Atan2(gameObject.transform.position.y - worldMousePosition.y, gameObject.transform.position.x - worldMousePosition.x) * Mathf.Rad2Deg;
+                mayPointer.transform.rotation = Quaternion.Euler(0, 0, mayDirection);
+
+                float forceRatio = Vector2.Distance(gameObject.transform.position, worldMousePosition);
+                mayDashForce = forceRatio * mayDashConst;
+                if (mayDashForce > mayDashMaxForce)
+                {
+                    mayDashForce = mayDashMaxForce;
+                }
+
+                mayPointer.SetActive(true);
+
+                float mayExtend = forceRatio * mayDashPointerExtendConst;
+                Debug.Log("距離=" + forceRatio + " / 延展=" + mayExtend) ;
+                if (mayExtend > mayDashPointerExtendMax)
+                {
+                    mayExtend = mayDashPointerExtendMax;
+                }
+                mayPointer.transform.localScale = new Vector3(mayExtend, 1,1);
+                Time.timeScale = mayAimingTimeScale;
+            }
+            else
+            {
+                mayAiming = false;
+                Time.timeScale = 1f;
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                //放開 並朝方向飛出去
+
+                mayPointer.SetActive(false);
+                Invoke("trackRec", 0.58f);//等待一段時間後自然回到john身邊
+            }
+        }
+        if (mayAiming)
+        {
+            //cal force
+
+        }
+    }
+    public void trackRec()
+    {
+        isTracking = true;
     }
 }
