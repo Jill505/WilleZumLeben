@@ -2161,6 +2161,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1625764207443487912, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
   m_PrefabInstance: {fileID: 6472372875655022480}
   m_PrefabAsset: {fileID: 0}
+--- !u!58 &1690385379
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690385371}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &1703565894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,7 +2883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5660505668209185151, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
       propertyPath: mayDashConst
-      value: 0.3
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8807386096950393978, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
       propertyPath: m_Name
@@ -2860,7 +2895,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1625764207443487912, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1404286192}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8807386096950393978, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1690385379}
   m_SourcePrefab: {fileID: 100100000, guid: 1ca65556b904db84e9369d2b740376b1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

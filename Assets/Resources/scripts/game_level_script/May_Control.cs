@@ -40,6 +40,11 @@ public class May_Control : MonoBehaviour
     public GameObject mayPointer;
     public float mayAimingTimeScale = 0.8f;
 
+    //Anger relative
+    public float mayAngerMaxment = 5f;
+    public float mayDashConsume = 5f;
+    public float mayNowAnger = 5f;
+
 
     private void Awake()
     {
@@ -71,37 +76,41 @@ public class May_Control : MonoBehaviour
 
     public void soloTargetPos()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (isTracking && mayControlalbe)
         {
-            //設定目標位置
-            Vector2 mousePosition = Input.mousePosition;
-            Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            targetPos = worldMousePosition;
 
-            moveMissionActing = true;
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                //設定目標位置
+                Vector2 mousePosition = Input.mousePosition;
+                Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                targetPos = worldMousePosition;
 
-            //生成一個小動畫
-        }
-        
-        if (targetPos == (Vector2)gameObject.transform.position)
-        {
-            //減速 不要直接停止
-            moveMissionActing = false;
-            rb2d.velocity = Vector2.zero;
-        }
-        else
-        {
-            //character move to target position tracking
-            //Vector2 theVec = (Vector2)gameObject.transform.position - targetPos;
-            //float diraction = Mathf.Atan2(theVec.y,theVec.x);
-            //rb2d.velocity = targetPos * maySpeed;
-        }
+                moveMissionActing = true;
 
-        if (moveMissionActing)
-        {
-            //Vector2 theVec = (Vector2)gameObject.transform.position - targetPos;
-            //float diraction = Mathf.Atan2(theVec.y, theVec.x);
-            //rb2d.velocity = targetPos * maySpeed;
+                //生成一個小動畫
+            }
+
+            if (targetPos == (Vector2)gameObject.transform.position)
+            {
+                //減速 不要直接停止
+                moveMissionActing = false;
+                rb2d.velocity = Vector2.zero;
+            }
+            else
+            {
+                //character move to target position tracking
+                //Vector2 theVec = (Vector2)gameObject.transform.position - targetPos;
+                //float diraction = Mathf.Atan2(theVec.y,theVec.x);
+                //rb2d.velocity = targetPos * maySpeed;
+            }
+
+            if (moveMissionActing)
+            {
+                //Vector2 theVec = (Vector2)gameObject.transform.position - targetPos;
+                //float diraction = Mathf.Atan2(theVec.y, theVec.x);
+                //rb2d.velocity = targetPos * maySpeed;
+            }
         }
     }
 
@@ -112,133 +121,138 @@ public class May_Control : MonoBehaviour
 
     public void following()
     {
-        // 計算方向單位向量
-        Vector2 direction = (johnObject.transform.position - gameObject.transform.position).normalized;
-
-        // 檢查距離是否大於跟隨半徑
-        if (Vector2.Distance(gameObject.transform.position, johnObject.transform.position) > fallowRadis && isTracking)
+        if (isTracking && mayControlalbe)
         {
-            // 加速
-            if (Mathf.Abs(mayVectorSpeed.x) < maySpeed)
-            {
-                mayVectorSpeed.x += direction.x * mayASpeed * Time.deltaTime;
-            }
-            if (Mathf.Abs(mayVectorSpeed.y) < maySpeed)
-            {
-                mayVectorSpeed.y += direction.y * mayASpeed * Time.deltaTime;
-            }
 
-            // 設置剛體速度
-            rb2d.velocity = mayVectorSpeed;
-        }
-        else
-        {
-            // 減速
-            if (Mathf.Abs(mayVectorSpeed.x) > mayEndSpeed)
+            // 計算方向單位向量
+            Vector2 direction = (johnObject.transform.position - gameObject.transform.position).normalized;
+
+            // 檢查距離是否大於跟隨半徑
+            if (Vector2.Distance(gameObject.transform.position, johnObject.transform.position) > fallowRadis && isTracking)
             {
-                mayVectorSpeed.x -= Mathf.Sign(mayVectorSpeed.x) * mayDeASpeed * Time.deltaTime;
-                if (Mathf.Abs(mayVectorSpeed.x) < mayEndSpeed)
+                // 加速
+                if (Mathf.Abs(mayVectorSpeed.x) < maySpeed)
                 {
-                    mayVectorSpeed.x = 0; // 停止
+                    mayVectorSpeed.x += direction.x * mayASpeed * Time.deltaTime;
                 }
+                if (Mathf.Abs(mayVectorSpeed.y) < maySpeed)
+                {
+                    mayVectorSpeed.y += direction.y * mayASpeed * Time.deltaTime;
+                }
+
+                // 設置剛體速度
+                rb2d.velocity = mayVectorSpeed;
             }
             else
             {
-                mayVectorSpeed.x = 0;
-            }
-
-            if (Mathf.Abs(mayVectorSpeed.y) > mayEndSpeed)
-            {
-                mayVectorSpeed.y -= Mathf.Sign(mayVectorSpeed.y) * mayDeASpeed * Time.deltaTime;
-                if (Mathf.Abs(mayVectorSpeed.y) < mayEndSpeed)
+                // 減速
+                if (Mathf.Abs(mayVectorSpeed.x) > mayEndSpeed)
                 {
-                    mayVectorSpeed.y = 0; // 停止
-                }
-            }
-            else
-            {
-                mayVectorSpeed.y = 0;
-            }
-
-            // 設置剛體速度
-            rb2d.velocity = mayVectorSpeed;
-        }
-
-        /*
-        float deg = Mathf.Atan2(gameObject.transform.position.y - johnObject.transform.position.y, gameObject.transform.position.x - johnObject.transform.position.x) * Mathf.Rad2Deg;
-
-        float xCom = Mathf.Sin(deg);
-        float yCom = Mathf.Cos(deg);
-
-        float sum = Mathf.Abs(xCom + yCom);
-
-        xCom = xCom / sum;
-        yCom = yCom / sum;
-        //二分量
-
-        if (Vector2.Distance(gameObject.transform.position, johnObject.transform.position) > fallowRadis && isTracking == true)
-        {
-            if (Mathf.Abs(mayVectorSpeed.x) < maySpeed)
-            {
-                mayVectorSpeed.x += xCom* mayASpeed * Time.deltaTime;
-            }
-            if (Mathf.Abs(mayVectorSpeed.y) < maySpeed)
-            {
-                mayVectorSpeed.y += yCom * mayASpeed * Time.deltaTime;
-            }
-
-            rb2d.velocity = mayVectorSpeed;
-        }
-        else
-        {
-            //Speed decrease
-            if (Mathf.Abs(mayVectorSpeed.x) > mayEndSpeed)
-            {
-                if (mayVectorSpeed.x > 0)
-                {
-                    // - 
-                    mayVectorSpeed.x -= mayDeASpeed * Time.deltaTime;
+                    mayVectorSpeed.x -= Mathf.Sign(mayVectorSpeed.x) * mayDeASpeed * Time.deltaTime;
+                    if (Mathf.Abs(mayVectorSpeed.x) < mayEndSpeed)
+                    {
+                        mayVectorSpeed.x = 0; // 停止
+                    }
                 }
                 else
                 {
-                    // + 
-                    mayVectorSpeed.x += mayDeASpeed * Time.deltaTime;
+                    mayVectorSpeed.x = 0;
                 }
-            }
-            else
-            {
-                mayVectorSpeed.x = 0;
-            }
 
-            if (Mathf.Abs(mayVectorSpeed.y) > mayEndSpeed)
-            {
-                if (mayVectorSpeed.y > 0)
+                if (Mathf.Abs(mayVectorSpeed.y) > mayEndSpeed)
                 {
-                    // - 
-                    mayVectorSpeed.y -= mayDeASpeed * Time.deltaTime;
+                    mayVectorSpeed.y -= Mathf.Sign(mayVectorSpeed.y) * mayDeASpeed * Time.deltaTime;
+                    if (Mathf.Abs(mayVectorSpeed.y) < mayEndSpeed)
+                    {
+                        mayVectorSpeed.y = 0; // 停止
+                    }
                 }
                 else
                 {
-                    // + 
-                    mayVectorSpeed.y += mayDeASpeed * Time.deltaTime;
+                    mayVectorSpeed.y = 0;
                 }
+
+                // 設置剛體速度
+                rb2d.velocity = mayVectorSpeed;
+            }
+
+            /*
+            float deg = Mathf.Atan2(gameObject.transform.position.y - johnObject.transform.position.y, gameObject.transform.position.x - johnObject.transform.position.x) * Mathf.Rad2Deg;
+
+            float xCom = Mathf.Sin(deg);
+            float yCom = Mathf.Cos(deg);
+
+            float sum = Mathf.Abs(xCom + yCom);
+
+            xCom = xCom / sum;
+            yCom = yCom / sum;
+            //二分量
+
+            if (Vector2.Distance(gameObject.transform.position, johnObject.transform.position) > fallowRadis && isTracking == true)
+            {
+                if (Mathf.Abs(mayVectorSpeed.x) < maySpeed)
+                {
+                    mayVectorSpeed.x += xCom* mayASpeed * Time.deltaTime;
+                }
+                if (Mathf.Abs(mayVectorSpeed.y) < maySpeed)
+                {
+                    mayVectorSpeed.y += yCom * mayASpeed * Time.deltaTime;
+                }
+
+                rb2d.velocity = mayVectorSpeed;
             }
             else
             {
-                mayVectorSpeed.y = 0;
-            }
+                //Speed decrease
+                if (Mathf.Abs(mayVectorSpeed.x) > mayEndSpeed)
+                {
+                    if (mayVectorSpeed.x > 0)
+                    {
+                        // - 
+                        mayVectorSpeed.x -= mayDeASpeed * Time.deltaTime;
+                    }
+                    else
+                    {
+                        // + 
+                        mayVectorSpeed.x += mayDeASpeed * Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    mayVectorSpeed.x = 0;
+                }
 
-            rb2d.velocity = mayVectorSpeed;
-        }*/
+                if (Mathf.Abs(mayVectorSpeed.y) > mayEndSpeed)
+                {
+                    if (mayVectorSpeed.y > 0)
+                    {
+                        // - 
+                        mayVectorSpeed.y -= mayDeASpeed * Time.deltaTime;
+                    }
+                    else
+                    {
+                        // + 
+                        mayVectorSpeed.y += mayDeASpeed * Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    mayVectorSpeed.y = 0;
+                }
+
+                rb2d.velocity = mayVectorSpeed;
+            }*/
+        }
     }
 
     public void MaySoloAttack()
     {
-        if (mayControlalbe)//可操作 而且怒氣大於消耗
+        if (mayControlalbe && mayNowAnger>=mayDashConsume)//可操作 而且怒氣大於消耗
         {
             if (Input.GetKey(KeyCode.Space))
             {
                 mayAiming = true;
+                isTracking = false;
 
                 Vector2 mousePosition = Input.mousePosition;
                 Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -256,7 +270,7 @@ public class May_Control : MonoBehaviour
                 mayPointer.SetActive(true);
 
                 float mayExtend = forceRatio * mayDashPointerExtendConst;
-                Debug.Log("距離=" + forceRatio + " / 延展=" + mayExtend) ;
+                //Debug.Log("距離=" + forceRatio + " / 延展=" + mayExtend) ;
                 if (mayExtend > mayDashPointerExtendMax)
                 {
                     mayExtend = mayDashPointerExtendMax;
@@ -272,9 +286,17 @@ public class May_Control : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 //放開 並朝方向飛出去
+                Vector2 mousePosition = Input.mousePosition;
+                Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                Vector2 directionVector = (worldMousePosition - (Vector2)gameObject.transform.position).normalized;
+                Debug.Log("Dash Vector: " + directionVector);
+                Vector2 dashForceWithDirection = directionVector * mayDashForce;
+                Debug.Log("Dash Force Vector: " + dashForceWithDirection);
+                //rb2d.AddForce(dashForceWithDirection);
+                rb2d.velocity += dashForceWithDirection;
 
                 mayPointer.SetActive(false);
-                Invoke("trackRec", 0.58f);//等待一段時間後自然回到john身邊
+                Invoke("trackRec", 3f);//等待一段時間後自然回到john身邊
             }
         }
         if (mayAiming)
