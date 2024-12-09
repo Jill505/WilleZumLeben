@@ -19,6 +19,8 @@ public class Level_Core : MonoBehaviour
 
     public string nextLevelName = "lobby";
 
+    public bool gameFail = false;
+
     void Start()
     {
         exit.nextLevelName = nextLevelName;
@@ -30,7 +32,14 @@ public class Level_Core : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameFail == true)
+        {
+            //allow player press button R to retry the game
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                LoadNextScene(getNowSceneName());
+            }
+        }
     }
 
     public void ControlTimeScale()
@@ -46,8 +55,27 @@ public class Level_Core : MonoBehaviour
 
     }
 
-    public void LoadNextScene()
+    public void LoadNextScene(string nextLevelNameS)
     {
+        nextLevelName = nextLevelNameS;
+        StartCoroutine(LoadNextSceneCoroutine());
+    }
+    public IEnumerator LoadNextSceneCoroutine()
+    {
+        //Add Animator and wait
+        yield return null;
+        SceneManager.LoadScene(nextLevelName);
         //Load Next Scene
+    }
+
+    public void gameFailFunction()
+    {
+        gameFail = true;
+
+    }
+
+    public string getNowSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
     }
 }

@@ -31,6 +31,11 @@ public class John_Control : MonoBehaviour
 
     public float recoli = 0.5f;//0~1 0=完全停止 1=完全無後座力
     public float recoliRememberMaxSpeed = 7f;
+
+    public float johnHealth = 1f;
+    public bool johnInvincible = false;
+
+
     private void Awake()
     {
         if (level_Core == null)
@@ -232,5 +237,46 @@ public class John_Control : MonoBehaviour
         johnMaxmentSpeed = recoliRememberMaxSpeed;
 
         yield return null;
+    }
+
+    public void johnInjurd()
+    {
+        if (!johnInvincible)
+        {
+            //john不是無敵狀態 對其造成傷害
+            johnHealth -= 1;
+            if (johnHealth <= 0)
+            {
+                //dead
+                johnDead();
+            }
+        }
+        else
+        {
+            //觸發迴避音效 讓玩家爽一下
+        }
+    }
+    public void johnInjurd(float damage) //多載
+    {
+        if (!johnInvincible)
+        {
+            //john不是無敵狀態 對其造成傷害
+            johnHealth -= damage;
+        }
+        else
+        {
+            //觸發迴避音效 讓玩家爽一下
+            if (johnHealth <= 0)
+            {
+                //dead
+                johnDead();
+            }
+        }
+    }
+    public void johnDead()
+    {
+        //Broadcast john is dead
+        level_Core.gameFail = true;
+        level_Core.gameFailFunction();
     }
 }
