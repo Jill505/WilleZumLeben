@@ -27,6 +27,14 @@ public class mobBullet : MonoBehaviour
         if (collision.gameObject.tag == "John")
         {
             //Trigger it's injurd function
+            collision.gameObject.GetComponent<John_Control>().johnInjurd();
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "May")
+        {
+            //Trigger it's injurd function
+            //collision.gameObject.GetComponent<May_Control>().johnInjurd();
+            Destroy(gameObject);
         }
     }
 }

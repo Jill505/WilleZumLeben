@@ -66,7 +66,8 @@ public class Level_Core : MonoBehaviour
     public IEnumerator LoadNextSceneCoroutine()
     {
         //Add Animator and wait
-        yield return null;
+        canvasAnimator.SetTrigger("LoadOut");
+        yield return new WaitForSeconds(1.3f);
         SceneManager.LoadScene(nextLevelName);
         //Load Next Scene
     }

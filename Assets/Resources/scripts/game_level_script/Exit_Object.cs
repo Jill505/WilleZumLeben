@@ -61,7 +61,7 @@ public class Exit_Object : MonoBehaviour
                     Debug.Log("載入場景：" + nextLevelName);
                     Debug.Log("如果出bug 要不場景沒有丟到build setting裡面 要不名字寫錯 注意大小寫和空白鍵有無");
                     level_Core.LoadNextScene(nextLevelName);
-                    SceneManager.LoadScene(nextLevelName);
+                    //SceneManager.LoadScene(nextLevelName);
                 }
             }
         }
