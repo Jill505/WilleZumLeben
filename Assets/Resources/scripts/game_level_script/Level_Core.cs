@@ -17,6 +17,9 @@ public class Level_Core : MonoBehaviour
     public GameObject John;
     public GameObject May;
 
+    public Animator canvasAnimator;
+    public GameObject swapRetry;
+
     public string nextLevelName = "lobby";
 
     public bool gameFail = false;
@@ -71,7 +74,8 @@ public class Level_Core : MonoBehaviour
     public void gameFailFunction()
     {
         gameFail = true;
-
+        //動畫介入 允許按R重試
+        swapRetry.SetActive(true);
     }
 
     public string getNowSceneName()
