@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MobBase : MonoBehaviour
 {
-    [Range(1,5)]public int health = 1;
+    public float health = 1f;
     public float speed = 1f;
 
     public float deadFromDiraction;
@@ -45,7 +45,7 @@ public class MobBase : MonoBehaviour
         TimeCurver();
     }
 
-    public virtual void GetInjured(int damage) //Dead
+    public virtual void GetInjured(float damage) //Dead
     {
         health -= damage;
         if (health > 0)
