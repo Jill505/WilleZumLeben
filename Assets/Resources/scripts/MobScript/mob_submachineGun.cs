@@ -6,9 +6,10 @@ public class mob_submachineGun : MobBase
 {
    private Transform John;
    private bool shotSound = false;
+   private int i = 0;
 
    public float shootingRange;
-   public float hearingRange ;
+   public float hearingRange;
    public float lineOfDetect;
    public float bulletCount = 10; // 要連續發射的子彈數量
    public float interval = 0.1f; // 每顆子彈之間的時間間隔
@@ -27,11 +28,21 @@ public class mob_submachineGun : MobBase
     {
         rb = GetComponent<Rigidbody2D>();
         John = GameObject.FindGameObjectWithTag("John").transform;
-        JohnTest.OnPlayerShot += hearing;
+        JohnTest.OnPlayerShot += hearing;                                        //商討一下需要在主John那加入些委託
     }
 
     void FixedUpdate()
     {
+        if(isDead) 
+        {
+        while(i<=1)
+        {
+            Dead();
+            i++;
+        }
+        return;
+        }
+        
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
         
         // 計算角度
@@ -76,6 +87,10 @@ public class mob_submachineGun : MobBase
         else if(distanceFromPlayer <= shootingRange)
         {
             rb.rotation = angle;
+        }
+        else
+        {
+            rb.angularVelocity = 0f;
         }
     }
     void hearing()

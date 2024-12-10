@@ -6,6 +6,7 @@ public class mob_handGun : MobBase
 {
    private Transform John;
    private bool shotSound = false;
+   private int i = 0;
    public float shootingRange;
    public float hearingRange;
    public float lineOfDetect;
@@ -28,6 +29,15 @@ public class mob_handGun : MobBase
 
     void Update()
     {
+        if(isDead) 
+        {
+        while(i<=1)
+        {
+            Dead();
+            i++;
+        }
+        return;
+        }
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
         
         // 計算角度
@@ -61,6 +71,10 @@ public class mob_handGun : MobBase
         else if(distanceFromPlayer <= shootingRange)
         {
             rb.rotation = angle;
+        }
+        else
+        {
+            rb.angularVelocity = 0f;        
         }
     }
     void hearing()
