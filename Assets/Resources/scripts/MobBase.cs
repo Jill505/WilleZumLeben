@@ -10,6 +10,7 @@ public class MobBase : MonoBehaviour
     public float deadFromDiraction;
 
     public bool isDead = false;
+    
 
     // 定义一个 AnimationCurve 类型的变量，供 Inspector 使用
     public AnimationCurve timeCurve = AnimationCurve.Linear(0.5f, 1, 1, 1);
@@ -18,6 +19,7 @@ public class MobBase : MonoBehaviour
     public float animationDuration = 1f;
 
     private float timer = 10f;
+    private float alpha = 0.5f;
 
     public GameObject deadSoundEffect;
     public GameObject hitSoundEffect;
@@ -51,6 +53,7 @@ public class MobBase : MonoBehaviour
             //survive
             Instantiate(hitSoundEffect);
             timer = 0.2f;
+
         }
         else
         {
@@ -58,10 +61,39 @@ public class MobBase : MonoBehaviour
 
             timer = 0;
             isDead = true;
-            Instantiate(deadSoundEffect);
+            Dead();
+
         }
     }
 
+    public void Dead()
+    {
+        Instantiate(deadSoundEffect);
+
+                CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
+                SpriteRenderer currentRenderer = GetComponent<SpriteRenderer>();
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+                Color color = currentRenderer.color;
+                color.a = Mathf.Clamp01(alpha);
+                currentRenderer.color = color;
+
+                circleCollider2D.isTrigger = true;
+
+                rb.velocity = Vector2.zero; 
+                rb.angularVelocity = 0f;
+
+                foreach (Transform child in transform)
+                {
+                    SpriteRenderer childRenderer = child.GetComponent<SpriteRenderer>();
+                    Color childColor = childRenderer.color;
+                    childColor.a = Mathf.Clamp01(alpha);
+                    childRenderer.color = childColor;
+
+                    rb.velocity = Vector2.zero; 
+                    rb.angularVelocity = 0f;
+                }
+    }
     public virtual void slashDeadAnimation()
     {
 

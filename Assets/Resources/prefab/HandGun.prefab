@@ -103,7 +103,7 @@ MonoBehaviour:
   health: 1
   speed: 5
   deadFromDiraction: 0
-  isDead: 0
+  isDead: 1
   timeCurve:
     serializedVersion: 2
     m_Curve:
@@ -129,8 +129,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationDuration: 1
-  deadSoundEffect: {fileID: 9166441664917192157, guid: 6f34259d773ac4f4d9936ac21b2a227d, type: 3}
-  hitSoundEffect: {fileID: 9107652110300139137, guid: 02099ec228159dc40a4368e5ae3979b6, type: 3}
+  deadSoundEffect: {fileID: 2281027897876956882, guid: 64f05843c22dacd44867f597c3eedc0d, type: 3}
+  hitSoundEffect: {fileID: 8780462911014771537, guid: 6e6756bce2f571e4284f4e0c6b25ffde, type: 3}
   shootingRange: 3.22
   hearingRange: 12.5
   lineOfDetect: 4.93

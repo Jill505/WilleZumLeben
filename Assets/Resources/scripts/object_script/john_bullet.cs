@@ -7,7 +7,7 @@ public class john_bullet : MonoBehaviour
 {
     public Rigidbody2D rb2d;
     public float bulletSpeed;
-    public float bulletDamage = 1;
+    public float bulletDamage = 1f;
 
     public float cameraOffestStrength;
 
