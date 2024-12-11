@@ -10,7 +10,7 @@ public class box : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Fly(5f);
+       
     }
     public void Fly(float direction)
     {
