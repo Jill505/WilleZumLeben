@@ -9,6 +9,7 @@ TagManager:
   - Mob
   - Wall
   - BreakBoard
+  - box
   layers:
   - Default
   - TransparentFX
