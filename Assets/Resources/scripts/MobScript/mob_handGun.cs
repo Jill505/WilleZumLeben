@@ -7,6 +7,7 @@ public class mob_handGun : MobBase
    private Transform John;
    private bool shotSound = false;
    private int i = 0;
+   public float bulletspeed = 500f;
    public float shootingRange;
    public float hearingRange;
    public float lineOfDetect;
@@ -17,7 +18,7 @@ public class mob_handGun : MobBase
    private bool isRecoiling = false;  
    
 
-   public GameObject bullet;
+   public Rigidbody2D bullet;
    public Transform barrel;
    private Rigidbody2D rb;
     void Start()
@@ -84,7 +85,9 @@ public class mob_handGun : MobBase
 
     void Shoot()
     {
-        Instantiate(bullet,barrel.position,barrel.rotation);
+        var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
+        spawnedBullet.AddForce(barrel.up * bulletspeed);
+        
         Vector2 recoilDirection = (transform.position - barrel.position).normalized;
         isRecoiling = true;
         rb.velocity = Vector2.zero;

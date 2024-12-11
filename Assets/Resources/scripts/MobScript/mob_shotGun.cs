@@ -8,18 +8,18 @@ public class mob_shotGun : MobBase
    private bool shotSound = false;
    private int i = 0;
 
+   public float bulletspeed = 500f;
    public float shootingRange;
    public float hearingRange;
    public float lineOfDetect;
    public float bulletCount = 10; // 要連續發射的子彈數量
-   public float interval = 0.1f; // 每顆子彈之間的時間間隔
    [Range(0.4f,5f)] public float fireRate;
    public float nextFireTime;
    public float recoilForce = 5f;     // 後座力大小
    public float recoilDuration = 0.5f;
    private bool isRecoiling = false;  
 
-   public GameObject bullet;
+   public Rigidbody2D bullet;
    public Transform barrel;
    private Rigidbody2D rb;
 
@@ -56,7 +56,7 @@ public class mob_shotGun : MobBase
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
                 while(nextFireTime <Time.time)
                {
-                StartCoroutine(ShootBullets());
+                Shoot();
                 nextFireTime = Time.time + fireRate;
                }
             }
@@ -70,7 +70,7 @@ public class mob_shotGun : MobBase
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
                  while(nextFireTime <Time.time)
                 {
-                  StartCoroutine(ShootBullets());
+                  Shoot();
                   nextFireTime = Time.time + fireRate;
                 }
             }
@@ -80,7 +80,7 @@ public class mob_shotGun : MobBase
         {
             if (!isRecoiling)
             {
-              StartCoroutine(ShootBullets());
+              Shoot();
               nextFireTime = Time.time + fireRate;            
             }
         }
@@ -98,24 +98,41 @@ public class mob_shotGun : MobBase
         shotSound = true; 
     }
     
-    private IEnumerator ShootBullets()
-{
-
-    for (int i = 0; i < bulletCount; i++)
+    private void Shoot()
     {
-        // 生成子彈
-        Instantiate(bullet, barrel.position, barrel.rotation);
-        Vector2 recoilDirection = (transform.position - barrel.position).normalized;
-        isRecoiling = true;
-        rb.velocity = Vector2.zero;
-        rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
-        StartCoroutine(StopRecoilAfterDelay());
 
-        // 等待間隔時間
-        yield return new WaitForSeconds(interval);
+        for (int i = 0; i < 5; i++)
+        {
+        // 生成子彈
+            var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
+            switch(i)
+            {
+                case 0:
+                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,-90,0f));
+                    break;
+                case 1:
+                    spawnedBullet.AddForce(barrel.up * bulletspeed+ new Vector3(0f,90f,0f));
+                    break;
+                case 2:
+                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,0f,0f));
+                    break;
+                case 3:
+                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,45f,0f));
+                    break;
+                case 4:
+                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,-45f,0f));
+                    break;
+            }
+
+            Vector2 recoilDirection = (transform.position - barrel.position).normalized;
+            isRecoiling = true;
+            rb.velocity = Vector2.zero;
+            rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
+            StartCoroutine(StopRecoilAfterDelay());
+        }
     }
-}
-    IEnumerator StopRecoilAfterDelay()
+
+   IEnumerator StopRecoilAfterDelay()
     {
         yield return new WaitForSeconds(recoilDuration);  // 等待一段時間
         isRecoiling = false;

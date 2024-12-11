@@ -131,6 +131,7 @@ MonoBehaviour:
   animationDuration: 1
   deadSoundEffect: {fileID: 2281027897876956882, guid: 64f05843c22dacd44867f597c3eedc0d, type: 3}
   hitSoundEffect: {fileID: 8780462911014771537, guid: 6e6756bce2f571e4284f4e0c6b25ffde, type: 3}
+  bulletspeed: 500
   shootingRange: 3.22
   hearingRange: 12.5
   lineOfDetect: 4.93
@@ -138,7 +139,7 @@ MonoBehaviour:
   nextFireTime: 0
   recoilForce: 1.7
   recoilDuration: 0.2
-  bullet: {fileID: 6715737974044998931, guid: 744cbaeddcbe0684dbd6953957261a2e, type: 3}
+  bullet: {fileID: 6786766868604449820, guid: 744cbaeddcbe0684dbd6953957261a2e, type: 3}
   barrel: {fileID: 7188291252164669281}
 --- !u!50 &1778018362365408809
 Rigidbody2D:
@@ -227,13 +228,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4536255525525611924}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.51, y: -0.01, z: 0}
-  m_LocalScale: {x: 0.54665637, y: 0.2356768, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.581, y: -0.0366, z: 0}
+  m_LocalScale: {x: 0.22727646, y: 0.37762493, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4886508572646766549}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &2097153204998321224
 SpriteRenderer:
   m_ObjectHideFlags: 0

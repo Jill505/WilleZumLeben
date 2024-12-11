@@ -8,6 +8,7 @@ public class mob_submachineGun : MobBase
    private bool shotSound = false;
    private int i = 0;
 
+   public float bulletspeed;
    public float shootingRange;
    public float hearingRange;
    public float lineOfDetect;
@@ -19,7 +20,7 @@ public class mob_submachineGun : MobBase
    public float recoilDuration = 0.5f;
    private bool isRecoiling = false;  
 
-   public GameObject bullet;
+   public Rigidbody2D bullet;
    public Transform barrel;
    private Rigidbody2D rb;
 
@@ -104,7 +105,9 @@ public class mob_submachineGun : MobBase
     for (int i = 0; i < bulletCount; i++)
     {
         // 生成子彈
-        Instantiate(bullet, barrel.position, barrel.rotation);
+        var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
+        spawnedBullet.AddForce(barrel.up * bulletspeed);
+
         Vector2 recoilDirection = (transform.position - barrel.position).normalized;
         isRecoiling = true;
         rb.velocity = Vector2.zero;
