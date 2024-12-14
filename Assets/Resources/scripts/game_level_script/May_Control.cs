@@ -45,12 +45,18 @@ public class May_Control : MonoBehaviour
     public float mayDashConsume = 5f;
     public float mayNowAnger = 5f;
 
+    public Animator angerAnimator;
+
 
     private void Awake()
     {
         if (level_Core == null)
         {
             level_Core = GameObject.Find("LevelCore").GetComponent<Level_Core>();
+        }
+        if (angerAnimator == null)
+        {
+            angerAnimator = GameObject.Find("tape").GetComponent<Animator>();
         }
     }
     // Start is called before the first frame update
@@ -67,6 +73,7 @@ public class May_Control : MonoBehaviour
             //soloTargetPos();
             following();
             MaySoloAttack();
+            AngerUISync();
         }
         else
         {
@@ -308,5 +315,12 @@ public class May_Control : MonoBehaviour
     public void trackRec()
     {
         isTracking = true;
+    }
+
+    public void AngerUISync()
+    {
+        float AngerRate = 1f + (mayNowAnger / mayAngerMaxment);
+        if (AngerRate < 1f) AngerRate = 1f;
+        angerAnimator.speed = AngerRate;
     }
 }
