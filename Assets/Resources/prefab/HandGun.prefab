@@ -103,7 +103,7 @@ MonoBehaviour:
   health: 1
   speed: 5
   deadFromDiraction: 0
-  isDead: 1
+  isDead: 0
   timeCurve:
     serializedVersion: 2
     m_Curve:
