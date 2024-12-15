@@ -323,4 +323,16 @@ public class May_Control : MonoBehaviour
         if (AngerRate < 1f) AngerRate = 1f;
         angerAnimator.speed = AngerRate;
     }
+
+    public void getAnger() {
+        mayNowAnger += 1f;
+    }
+    public void getAnger(int angerNum)
+    {
+        mayNowAnger += angerNum;
+    }
+    public void getAnger(float angerNum)
+    {
+        mayNowAnger += angerNum;
+    }
 }

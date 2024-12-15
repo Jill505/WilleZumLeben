@@ -33,7 +33,7 @@ public class mobBullet : MonoBehaviour
         if (collision.gameObject.tag == "May")
         {
             //Trigger it's injurd function
-            //collision.gameObject.GetComponent<May_Control>().johnInjurd();
+            collision.gameObject.GetComponent<May_Control>().getAnger();
             Destroy(gameObject);
         }
     }

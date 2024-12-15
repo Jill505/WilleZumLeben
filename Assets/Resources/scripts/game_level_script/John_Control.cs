@@ -241,7 +241,7 @@ public class John_Control : MonoBehaviour
 
     public void johnInjurd()
     {
-        if (!johnInvincible)
+        if (johnInvincible == false)
         {
             //john不是無敵狀態 對其造成傷害
             johnHealth -= 1;
@@ -258,7 +258,7 @@ public class John_Control : MonoBehaviour
     }
     public void johnInjurd(float damage) //多載
     {
-        if (!johnInvincible)
+        if (johnInvincible == false)
         {
             //john不是無敵狀態 對其造成傷害
             johnHealth -= damage;
