@@ -44,16 +44,16 @@ public class test_pressurePlate : MonoBehaviour
             {
                 Debug.Log("沒有對話可以觸發 缺乏對話物件");
             }
+            if (onceClug)
+            {
+                gameObject.SetActive(false);
+            }
+
+            if (everyClug)
+            {
+                everyClug = !everyClug;
+            }
         }
 
-        if (onceClug)
-        {
-            gameObject.SetActive(false);
-        }
-
-        if (everyClug)
-        {
-            everyClug = !everyClug;
-        }
     }
 }

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/games/game_ori.unity
     guid: 5bc0bf10038eede48882f02e254b8ddf
+  - enabled: 1
+    path: Assets/Scenes/games/game_0_0_LiaoTest.unity
+    guid: 2651ad628a510b046a4abc5a56a81bec
   m_configObjects: {}
