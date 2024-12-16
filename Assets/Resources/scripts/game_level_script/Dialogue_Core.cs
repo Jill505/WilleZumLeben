@@ -26,6 +26,12 @@ public class Dialogue_Core : MonoBehaviour
 
     public bool isClog = false; //正在播放與否
 
+    public Image placeA;
+    public Image placeB;
+    public Image placeC;
+
+    public Sprite[] spriteAssetArray;
+
     //===============================================
     public void loadDialogContext(DialogContextObject dialogs)
     {
@@ -56,6 +62,13 @@ public class Dialogue_Core : MonoBehaviour
     {
         switch (judgeString)
         {
+            ///
+            ///  欸嘿 我知道其實可以用字串解析
+            ///  但是好懶惰喔
+            ///  所以就直接全部宣告好了 不想用腦 反正之後可以再優化嘛
+            ///
+
+
             case (""):
                 Debug.Log("未偵測到自元內容 跳過此行");
                 loadNextHanas();
@@ -70,6 +83,10 @@ public class Dialogue_Core : MonoBehaviour
                 Debug.Log("關閉對話框");
                 loadNextHanas();
                 DialogEnd();
+                //自動關閉相關內容
+                placeA.color = new Color(1, 1, 1, 0);
+                placeB.color = new Color(1, 1, 1, 0);
+                placeC.color = new Color(1, 1, 1, 0);
                 break;
 
             case ("Comm/ClugOpen"):
@@ -90,7 +107,12 @@ public class Dialogue_Core : MonoBehaviour
             case ("Comm/John Speaking"):
                 Debug.Log("說話中的角色切換為John");
                 loadNextHanas();
-                sayingName.text = "John 大壯";
+                sayingName.text = "John 約翰";
+                break;
+            case ("Comm/Benedict Speaking"):
+                Debug.Log("說話中的角色切換為Benedict");
+                loadNextHanas();
+                sayingName.text = "Benedict 巴魯赫";
                 break;
 
             case ("Comm/May Speaking"):
@@ -110,10 +132,81 @@ public class Dialogue_Core : MonoBehaviour
                 loadNextHanas();
                 break;
 
-            case ("Comm/ShowPicture/John"):
-                Debug.Log("立繪顯示 John");
+            case ("Comm/ShowPicture/leftPicture"):
+
+                Debug.Log("顯示最左邊的圖片");
+                placeA.color = new Color(1, 1, 1, 1);
                 loadNextHanas();
                 break;
+            case ("Comm/ShowPicture/middlePicture"):
+
+                Debug.Log("顯示中間的圖片");
+                placeB.color = new Color(1, 1, 1, 1);
+                loadNextHanas();
+                break;
+            case ("Comm/ShowPicture/rightPicture"):
+
+                Debug.Log("顯示右邊間的圖片");
+                placeC.color = new Color(1, 1, 1, 1);
+                loadNextHanas();
+                break;
+            case ("Comm/ClosePicture/leftPicture"):
+
+                Debug.Log("關閉最左邊的圖片");
+                placeA.color = new Color(1, 1, 1, 0);
+                loadNextHanas();
+                break;
+            case ("Comm/ClosePicture/middlePicture"):
+
+                Debug.Log("關閉中間的圖片");
+                placeB.color = new Color(1, 1, 1, 0);
+                loadNextHanas();
+                break;
+            case ("Comm/ClosePicture/rightPicture"):
+
+                Debug.Log("關閉右邊間的圖片");
+                placeC.color = new Color(1, 1, 1, 0);
+                loadNextHanas();
+                break;
+
+
+            case ("Comm/ShowPicture/John/L"):
+                Debug.Log("立繪更換John於左邊");
+                placeA.sprite = spriteAssetArray[1];
+                placeA.color = new Color(1, 1, 1, 1);
+                loadNextHanas();
+                break;
+            case ("Comm/ShowPicture/John/M"):
+                Debug.Log("立繪更換John於中間");
+                placeB.sprite = spriteAssetArray[1];
+                placeB.color = new Color(1, 1, 1, 1);
+                loadNextHanas();
+                break;
+            case ("Comm/ShowPicture/John/R"):
+                Debug.Log("立繪更換John於右邊");
+                placeC.sprite = spriteAssetArray[1];
+                placeC.color = new Color(1, 1, 1, 1);
+                loadNextHanas();
+                break;
+            case ("Comm/ShowPicture/May/L"):
+                Debug.Log("立繪顯示 May於左邊");
+                placeA.sprite = spriteAssetArray[2];
+                placeA.color = new Color(1, 1, 1, 1);
+                loadNextHanas();
+                break;
+            case ("Comm/ShowPicture/May/M"):
+                Debug.Log("立繪顯示 May於中間");
+                placeB.sprite = spriteAssetArray[2];
+                placeB.color = new Color(1, 1, 1, 1);
+                loadNextHanas();
+                break;
+            case ("Comm/ShowPicture/May/R"):
+                Debug.Log("立繪顯示 May於右邊");
+                placeC.sprite = spriteAssetArray[2];
+                placeC.color = new Color(1, 1, 1, 1);
+                loadNextHanas();
+                break;
+
 
             default:
                 coroutine = StartCoroutine(loadTexter(judgeString));

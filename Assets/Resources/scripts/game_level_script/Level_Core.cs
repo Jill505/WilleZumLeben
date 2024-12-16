@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -128,7 +129,7 @@ public class Level_Core : MonoBehaviour
         foreach (GameObject obj in allObjects)
         {
             // 檢查是否有 SpriteRenderer 組件
-            if (obj.GetComponent<SpriteRenderer>() != null)
+            if (obj.GetComponent<SpriteRenderer>() != null && obj.tag != "ground" && obj.tag != "background")
             {
                 objectsWithSpriteRenderer.Add(obj);
             }
@@ -136,5 +137,12 @@ public class Level_Core : MonoBehaviour
 
         // 將結果存入 registeringObjects
         registeringObjects = objectsWithSpriteRenderer.ToArray();
+    }
+
+    public void registerMe(GameObject obj)
+    {
+        List<GameObject> listObj = registeringObjects.ToList<GameObject>();
+        listObj.Add(obj);
+        registeringObjects = listObj.ToArray();
     }
 }

@@ -26,10 +26,12 @@ public class May_Control : MonoBehaviour
 
     public float fallowRadis = 2f;
     public bool isTracking;
+    public bool isAttacking = false;
 
     public bool mayAiming = false;
 
     //caling variable
+    public May_DamageZone mayDamageZone;
     public float mayDashForce = 15f;
     public float mayDirection;
     public float mayReadDashForce = 1f;
@@ -287,11 +289,14 @@ public class May_Control : MonoBehaviour
             }
             else
             {
+                //沒在瞄準時 數值歸回正常
                 mayAiming = false;
                 Time.timeScale = 1f;
             }
+
             if (Input.GetKeyUp(KeyCode.Space))
             {
+                CancelInvoke("trackRec");
                 //放開 並朝方向飛出去
                 Vector2 mousePosition = Input.mousePosition;
                 Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -303,6 +308,8 @@ public class May_Control : MonoBehaviour
                 rb2d.velocity += dashForceWithDirection;
 
                 mayPointer.SetActive(false);
+                isAttacking = true;
+
                 Invoke("trackRec", 3f);//等待一段時間後自然回到john身邊
             }
         }
@@ -315,6 +322,7 @@ public class May_Control : MonoBehaviour
     public void trackRec()
     {
         isTracking = true;
+        isAttacking = false;
     }
 
     public void AngerUISync()
@@ -334,5 +342,15 @@ public class May_Control : MonoBehaviour
     public void getAnger(float angerNum)
     {
         mayNowAnger += angerNum;
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        //撞牆反彈, 大於45度彈開 小於45度彈回 並加快返回速度x
+    }
+
+    public void maySpeedSlowDown(float slowDownRate)//0~1, 1代表完全停止
+    {
+        rb2d.velocity = new Vector2 (rb2d.velocity.x * slowDownRate ,rb2d.velocity.y * slowDownRate);
     }
 }

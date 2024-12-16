@@ -33,13 +33,10 @@ public class john_bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Mob")
         {
-            //�R��mob �åBmob���`
-            //Ĳ�o�ʵe �p���̨��רò��͸I���ʵe
             collision.gameObject.GetComponent<MobBase>().GetInjured(bulletDamage);
 
             //float hitDiraction = Mathf.Atan2(john.transform.position.y - collision.gameObject.transform.position.y, john.transform.position.x - collision.gameObject.transform.position.x) * Mathf.Rad2Deg;
             float hitDiraction = Mathf.Atan2(collision.gameObject.transform.position.y -  john.transform.position.y, collision.gameObject.transform.position.x - john.transform.position.x) * Mathf.Rad2Deg;
-            Debug.Log("�������סG" + hitDiraction);
 
             collision.gameObject.GetComponent<MobBase>().deadFromDiraction = hitDiraction;
 
@@ -53,9 +50,6 @@ public class john_bullet : MonoBehaviour
             xCom /= sum;
             yCom /= sum;
 
-            Debug.Log("X���q�G" +xCom);
-            Debug.Log("Y���q" + yCom);
-
             theCamera.transform.position += new Vector3(yCom,xCom,0) * cameraOffestStrength;
 
             theCamera.GetComponent<UI_Core>().shake();
@@ -63,7 +57,8 @@ public class john_bullet : MonoBehaviour
 
         if (collision.gameObject.tag == "Wall")
         {
-            //�l�u�}�a
+            //make sound effect
+            Destroy(gameObject);
         }
         
         if (collision.gameObject.tag == "")

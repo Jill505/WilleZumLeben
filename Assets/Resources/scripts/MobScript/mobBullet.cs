@@ -36,5 +36,10 @@ public class mobBullet : MonoBehaviour
             collision.gameObject.GetComponent<May_Control>().getAnger();
             Destroy(gameObject);
         }
+
+        if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 }
