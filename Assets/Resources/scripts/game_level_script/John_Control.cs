@@ -7,9 +7,12 @@ public class John_Control : MonoBehaviour
     public Level_Core level_Core;
     public Rigidbody2D rb2d;
     public GameObject johnBullet;
+    public GameObject Barrel;
     public GameObject johnBarrelPosition;
 
     public bool johnControlAble = true;
+
+    public bool isFacingRight = true;
 
     public GameObject pistolShootSoundEffect;
 
@@ -185,14 +188,36 @@ public class John_Control : MonoBehaviour
 
         rb2d.velocity = new Vector2(johnXspeed, johnYspeed);
 
-        //角色朝向滑鼠位置
+        //槍管朝向滑鼠位置
         Vector2 mousePosition = Input.mousePosition;
         Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
         float facingDiraction = Mathf.Atan2(transform.position.y - worldMousePosition.y, transform.position.x - worldMousePosition.x); 
 
+        //角色朝向
+        if (worldMousePosition.x > gameObject.transform.position.x)
+        {
+            //角色看向右邊
+            isFacingRight = true;
+        }
+        else
+        {
+            isFacingRight = false;
+        }
+
+        if (isFacingRight)
+        {
+            gameObject.transform.localEulerAngles = new Vector3(0,180,0);
+        }
+        else
+        {
+
+            gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+
         //sync Diraction
-        gameObject.transform.rotation = Quaternion.Euler(0, 0, facingDiraction * Mathf.Rad2Deg);
+        //gameObject.transform.rotation = Quaternion.Euler(0, 0, facingDiraction * Mathf.Rad2Deg);
+        Barrel.transform.rotation = Quaternion.Euler(0, 0, facingDiraction * Mathf.Rad2Deg);
 
         if (bulletNowNumber > 0 && johnControlAble && Input.GetKeyDown(KeyCode.Mouse0))
         {
