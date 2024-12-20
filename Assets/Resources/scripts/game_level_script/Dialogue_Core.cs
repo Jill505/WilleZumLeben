@@ -58,6 +58,83 @@ public class Dialogue_Core : MonoBehaviour
         }
     }
 
+
+
+    public void DialogEnd()
+    {
+        //關閉相關物件
+        sayingName.gameObject.SetActive(false);
+        showText.gameObject.SetActive(false);
+        backgroundImage.gameObject.SetActive(false);
+
+    }
+
+
+    //===============================================
+    void Start()
+    {
+        //startDialog();
+        DialogEnd();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!isClog)
+            {
+                if (loadingTextNum + 1 < hanasNum)
+                {
+                    loadingTextNum++;
+
+                    textJudge(hanas[loadingTextNum]);
+                }
+                else
+                {
+                    Debug.Log("超出選擇");
+                    DialogEnd();
+                }
+            }
+            else
+            {
+                Debug.Log("給我停下！");
+                StopCoroutine(coroutine);
+                showText.text = hanas[loadingTextNum];
+                isClog = false;
+            }
+        }
+    }
+
+    IEnumerator loadTexter(string theText)
+    {
+        isClog = true;
+
+        string swapStr = "";
+        int loopTimes = theText.Length;
+        for (int i = 0; i < loopTimes; i++)
+        {
+            swapStr += theText[i];
+            showText.text = swapStr;
+            yield return new WaitForSeconds(wordSpeed);
+        }
+        Debug.Log("顯示結束");
+
+        isClog = false;
+    }
+
+    public void loadNextHanas()
+    {
+        if (loadingTextNum + 1 < hanasNum)
+        {
+            loadingTextNum++;
+
+            textJudge(hanas[loadingTextNum]);
+        }
+    }
+
+    //=============================================== 指令往後面加
+
     public void textJudge(string judgeString)
     {
         switch (judgeString)
@@ -72,7 +149,7 @@ public class Dialogue_Core : MonoBehaviour
             case (""):
                 Debug.Log("未偵測到自元內容 跳過此行");
                 loadNextHanas();
-                    break;
+                break;
 
             case ("Comm/DialogOpen"):
                 Debug.Log("開啟對話框");
@@ -211,80 +288,6 @@ public class Dialogue_Core : MonoBehaviour
             default:
                 coroutine = StartCoroutine(loadTexter(judgeString));
                 break;
-        }
-    }
-
-
-    public void DialogEnd()
-    {
-        //關閉相關物件
-        sayingName.gameObject.SetActive(false);
-        showText.gameObject.SetActive(false);
-        backgroundImage.gameObject.SetActive(false);
-
-    }
-
-
-    //===============================================
-    void Start()
-    {
-        //startDialog();
-        DialogEnd();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
-        {
-            if (!isClog)
-            {
-                if (loadingTextNum + 1 < hanasNum)
-                {
-                    loadingTextNum++;
-
-                    textJudge(hanas[loadingTextNum]);
-                }
-                else
-                {
-                    Debug.Log("超出選擇");
-                    DialogEnd();
-                }
-            }
-            else
-            {
-                Debug.Log("給我停下！");
-                StopCoroutine(coroutine);
-                showText.text = hanas[loadingTextNum];
-                isClog = false;
-            }
-        }
-    }
-
-    IEnumerator loadTexter(string theText)
-    {
-        isClog = true;
-
-        string swapStr = "";
-        int loopTimes = theText.Length;
-        for (int i = 0; i < loopTimes; i++)
-        {
-            swapStr += theText[i];
-            showText.text = swapStr;
-            yield return new WaitForSeconds(wordSpeed);
-        }
-        Debug.Log("顯示結束");
-
-        isClog = false;
-    }
-
-    public void loadNextHanas()
-    {
-        if (loadingTextNum + 1 < hanasNum)
-        {
-            loadingTextNum++;
-
-            textJudge(hanas[loadingTextNum]);
         }
     }
 }

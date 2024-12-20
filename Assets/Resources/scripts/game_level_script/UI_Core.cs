@@ -11,8 +11,10 @@ public class UI_Core : MonoBehaviour
     public GameObject theCamera;
     public GameObject John;
     public GameObject May;
+    public Camera theCameraComponent;
 
-    public GameObject trackingTarget;
+    public Vector2 trackingTarget;
+    public float orthographic = 7.2f;
     public Vector2 trackingVariable = new Vector2(1,1);
     public float trackingDelayDistance = 0.8f;
 
@@ -21,11 +23,13 @@ public class UI_Core : MonoBehaviour
 
     public float cameraFunc_defultShakeTime = 0.1f;
     public float cameraFunc_defultShakeStrength = 1.0f;
+
     public enum CameraTrackingMode
     {
         followJohn,
         followMay,
         Middle,
+        locate
     }
     public CameraTrackingMode cameraTrackingMode = CameraTrackingMode.followJohn;
 
@@ -34,15 +38,18 @@ public class UI_Core : MonoBehaviour
         //selfCamera = GetComponent<Camera>();
         DefaultRect = selfCamera.rect;
         shakeFrameTime = 1f / shakeFps;
+        theCameraComponent = theCamera.GetComponent<Camera>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        theCameraComponent.orthographicSize = orthographic;
+
         Reset();
         if (cameraTrackingMode == CameraTrackingMode.followJohn)
         {
-            trackingTarget = John;
+            trackingTarget = John.transform.position;
         }
     }
 
@@ -53,6 +60,13 @@ public class UI_Core : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //shake(); 
+        }
+
+        switch (cameraTrackingMode)
+        {
+            case (CameraTrackingMode.followJohn):
+                trackingTarget = John.transform.position;
+                break;
         }
 
         if (isshakeCamera)
@@ -82,7 +96,7 @@ public class UI_Core : MonoBehaviour
     }
     private void LateUpdate()
     {
-        Vector2 calVector2 = new Vector2(Mathf.Abs(gameObject.transform.position.x - trackingTarget.transform.position.x), Mathf.Abs(gameObject.transform.position.y - trackingTarget.transform.position.y));
+        Vector2 calVector2 = new Vector2(Mathf.Abs(gameObject.transform.position.x - trackingTarget.x), Mathf.Abs(gameObject.transform.position.y - trackingTarget.y));
         /*    if (Vector2.Distance(calVector2, trackingVariable) > 0)
         {
 
@@ -95,7 +109,7 @@ public class UI_Core : MonoBehaviour
 
     private void FixedUpdate()
     {
-        gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, trackingTarget.transform.position, trackingFluence);
+        gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, trackingTarget, trackingFluence);
     }
 
     static public void CameraFunc_shake()
@@ -111,6 +125,7 @@ public class UI_Core : MonoBehaviour
 
     }
 
+    //==================================================================
     //從CSDN幹來的代碼
     //原文連結：https://blog.csdn.net/yjy99yjy999/article/details/121052210
 
@@ -144,5 +159,38 @@ public class UI_Core : MonoBehaviour
     public void shake()
     {
         isshakeCamera = true;
+    }
+
+    //==================================================================
+    public void JohnCameraLocateLerp()
+    {
+        CameraLocateLerp(orthographic,0.8f);
+        cameraTrackingMode = CameraTrackingMode.followJohn;
+    }
+    public void CameraLocateLerp( float optSize, float lerp)
+    {
+        //theCameraComponent.orthographicSize = Mathf.Lerp(theCameraComponent.orthographicSize, optSize, lerp);
+        StartCoroutine(CameraLocateLerpCoroutine(optSize, lerp));
+    }
+    public void CameraLocateLerp(Vector2 pos, float optSize,float lerp)
+    {
+        //theCameraComponent.orthographicSize = Mathf.Lerp(theCameraComponent.orthographicSize, optSize, lerp);
+        trackingTarget = pos;
+        StartCoroutine(CameraLocateLerpCoroutine(optSize,lerp));
+    }
+    IEnumerator CameraLocateLerpCoroutine(float optSize, float lerp)
+    {
+        float counter =0;
+        while (counter < 3)
+        {
+            theCameraComponent.orthographicSize = Mathf.LerpUnclamped(theCameraComponent.orthographicSize, optSize, lerp);
+            counter += Time.deltaTime;
+
+            //Switch Update mode and FixedUpdate mode
+            //yield return 0;
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
+
+        }
+        yield return 0;
     }
 }

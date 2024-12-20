@@ -11,16 +11,20 @@ public class John_Control : MonoBehaviour
     public GameObject johnBarrelPosition;
 
     public bool johnControlAble = true;
+    public bool proControlMode = false;
 
     public bool isFacingRight = true;
 
     public GameObject pistolShootSoundEffect;
 
 
-    [Range(4f,20f)]public float johnSpeed = 1.0f;
-    [Range(2f, 15f)] public float johnMaxmentSpeed = 7f;
+    //[Range(4f,20f)]
+    public float johnSpeed = 1.0f;
+    //[Range(2f, 15f)]
+    public float johnMaxmentSpeed = 7f;
     [Range(0.001f, 2f)] public float johnSpeedEndNum=0.2f;
-    [Range(0.1f, 20f)] public float johnSlowSpeed = 0.7f;
+    //[Range(0.1f, 20f)]
+    public float johnSlowSpeed = 0.7f;
     [Range(1f, 20f)] public float johnOptSideSpeed = 2f;
     public float johnXspeed = 0f;
     public float johnYspeed = 0f;
@@ -49,7 +53,17 @@ public class John_Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (proControlMode)
+        {
+            johnMaxmentSpeed = 8.2f;
+            johnSlowSpeed = 70f;
+            johnSpeed = 65f;
+            johnSpeedEndNum = 0.3f;
+        }
+
+
         recoliRememberMaxSpeed = johnMaxmentSpeed;
+
     }
 
     // Update is called once per frame

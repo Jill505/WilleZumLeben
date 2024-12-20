@@ -392,12 +392,14 @@ MonoBehaviour:
   Barrel: {fileID: 5452979838985265650}
   johnBarrelPosition: {fileID: 1292546015044049622}
   johnControlAble: 1
+  proControlMode: 0
+  isFacingRight: 1
   pistolShootSoundEffect: {fileID: 5238220996992817008, guid: 824a2c03ae0edd94b9ef9e5e14b01dab, type: 3}
   johnSpeed: 18
   johnMaxmentSpeed: 7
   johnSpeedEndNum: 0.01
   johnSlowSpeed: 7
-  johnOptSideSpeed: 2
+  johnOptSideSpeed: 1
   johnXspeed: 0
   johnYspeed: 0
   bulletNumber: 7
@@ -435,7 +437,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &4662299541647421841
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -468,6 +470,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.108798385, y: 1.9118577}
-  m_Size: {x: 1.1712546, y: 3.3692796}
+  m_Offset: {x: -0.108798385, y: 0.81284523}
+  m_Size: {x: 1.1712546, y: 1.1712546}
   m_Direction: 0
