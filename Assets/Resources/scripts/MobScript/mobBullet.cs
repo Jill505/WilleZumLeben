@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class mobBullet : MonoBehaviour
 {
-    //GameObject target;
-    //Rigidbody2D bulletRB;
+    
     void Start()
     {
-        //bulletRB = GetComponent<Rigidbody2D>();
-        //target = GameObject.FindGameObjectWithTag("John");
-        //Vector2 moveDir = (target.transform.position - transform.position).normalized * speed;
-        //bulletRB.velocity =  new Vector2(moveDir.x,moveDir.y);
         Destroy(this.gameObject,2);
     }
 
-    // Update is called once per frame
     void Update()
     {
         

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1859671444949082339}
   - component: {fileID: 5050368464108506024}
   - component: {fileID: 6786766868604449820}
-  - component: {fileID: 3058102694430791263}
+  - component: {fileID: 3745980304846367920}
   m_Layer: 0
   m_Name: MobBullet
   m_TagString: Untagged
@@ -113,7 +113,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3058102694430791263
+--- !u!114 &3745980304846367920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

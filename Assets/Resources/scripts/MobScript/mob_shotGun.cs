@@ -5,6 +5,9 @@ using UnityEngine;
 public class mob_shotGun : MobBase
 {
    private Transform John;
+   public Transform barrel;
+   public Rigidbody2D bullet;
+   private Rigidbody2D rb;
    private bool shotSound = false;
    private int i = 0;
 
@@ -12,16 +15,12 @@ public class mob_shotGun : MobBase
    public float shootingRange;
    public float hearingRange;
    public float lineOfDetect;
-   public float bulletCount = 10; // 要連續發射的子彈數量
    [Range(0.4f,5f)] public float fireRate;
    public float nextFireTime;
    public float recoilForce = 5f;     // 後座力大小
    public float recoilDuration = 0.5f;
    private bool isRecoiling = false;  
 
-   public Rigidbody2D bullet;
-   public Transform barrel;
-   private Rigidbody2D rb;
 
 
     void Start()
@@ -101,7 +100,7 @@ public class mob_shotGun : MobBase
     private void Shoot()
     {
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
         {
         // 生成子彈
             var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
@@ -121,6 +120,12 @@ public class mob_shotGun : MobBase
                     break;
                 case 4:
                     spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,-45f,0f));
+                    break;
+                case 5:
+                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,20f,50f));
+                    break;
+                case 6:
+                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,-20f,50f));
                     break;
             }
 

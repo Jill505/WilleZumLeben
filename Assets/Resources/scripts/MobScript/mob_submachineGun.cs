@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class mob_submachineGun : MobBase
 {
+   public Transform barrel;
    private Transform John;
+   public Rigidbody2D bullet;
+   private Rigidbody2D rb;
    private bool shotSound = false;
    private int i = 0;
 
@@ -15,14 +18,11 @@ public class mob_submachineGun : MobBase
    public float bulletCount = 10; // 要連續發射的子彈數量
    public float interval = 0.1f; // 每顆子彈之間的時間間隔
    [Range(0.4f,5f)] public float fireRate;
-   public float nextFireTime;
+   private float nextFireTime;
    public float recoilForce = 5f;     // 後座力大小
    public float recoilDuration = 0.5f;
    private bool isRecoiling = false;  
 
-   public Rigidbody2D bullet;
-   public Transform barrel;
-   private Rigidbody2D rb;
 
 
     void Start()
@@ -52,6 +52,7 @@ public class mob_submachineGun : MobBase
 
         if (distanceFromPlayer < hearingRange && distanceFromPlayer > lineOfDetect && shotSound)
         {
+            rb.rotation = angle;
             if (!isRecoiling)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
@@ -60,12 +61,11 @@ public class mob_submachineGun : MobBase
                 StartCoroutine(ShootBullets());
                 nextFireTime = Time.time + fireRate;
                }
-            }
-            rb.rotation = angle;
-           
+            }           
         }
         else if (distanceFromPlayer <lineOfDetect && distanceFromPlayer>shootingRange)
         {
+            rb.rotation = angle;
             if (!isRecoiling)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
@@ -75,19 +75,15 @@ public class mob_submachineGun : MobBase
                   nextFireTime = Time.time + fireRate;
                 }
             }
-            rb.rotation = angle;
-        }
-        else if(distanceFromPlayer <= shootingRange && nextFireTime <Time.time)
-        {
-            if (!isRecoiling)
-            {
-              StartCoroutine(ShootBullets());
-              nextFireTime = Time.time + fireRate;            
-            }
         }
         else if(distanceFromPlayer <= shootingRange)
         {
             rb.rotation = angle;
+            if (!isRecoiling && nextFireTime <Time.time)
+            {
+              StartCoroutine(ShootBullets());
+              nextFireTime = Time.time + fireRate;            
+            }
         }
         else
         {
@@ -101,7 +97,6 @@ public class mob_submachineGun : MobBase
     
     private IEnumerator ShootBullets()
 {
-
     for (int i = 0; i < bulletCount; i++)
     {
         // 生成子彈
@@ -125,16 +120,6 @@ public class mob_submachineGun : MobBase
 
         // 停止後座力影響，將速度設置為零
         rb.velocity = Vector2.zero;  // 停止敵人的移動
-        if (Vector2.Distance(John.position, transform.position) <= shootingRange)
-        {
-            // 繼續射擊邏輯
-            nextFireTime = Time.time + fireRate;
-        }
-        else
-        {
-            // 恢復正常的追擊速度
-            transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-        }
     }
     private void OnDrawGizmosSelected()
     {

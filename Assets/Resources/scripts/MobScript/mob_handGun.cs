@@ -5,6 +5,9 @@ using UnityEngine;
 public class mob_handGun : MobBase
 {
    private Transform John;
+   public Transform barrel;
+   public Rigidbody2D bullet;
+   private Rigidbody2D rb;
    private bool shotSound = false;
    private int i = 0;
    public float bulletspeed = 500f;
@@ -12,15 +15,11 @@ public class mob_handGun : MobBase
    public float hearingRange;
    public float lineOfDetect;
    [Range(0.2f,4f)] public float fireRate;
-   public float nextFireTime;
+   private float nextFireTime = 0f;
    public float recoilForce = 5f;     // 後座力大小
    public float recoilDuration = 0.5f;
    private bool isRecoiling = false;  
    
-
-   public Rigidbody2D bullet;
-   public Transform barrel;
-   private Rigidbody2D rb;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,6 +38,7 @@ public class mob_handGun : MobBase
         }
         return;
         }
+
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
         
         // 計算角度
@@ -46,35 +46,31 @@ public class mob_handGun : MobBase
         float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
         if (distanceFromPlayer < hearingRange && distanceFromPlayer > lineOfDetect && shotSound)
         {
+            rb.rotation = angle;
             if (!isRecoiling)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
             }
-            rb.rotation = angle;
         }
         else if (distanceFromPlayer < lineOfDetect && distanceFromPlayer > shootingRange)
         {
+            rb.rotation = angle;
             if (!isRecoiling)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
             }
-            rb.rotation = angle;
-        }
-        else if(distanceFromPlayer <= shootingRange && nextFireTime <Time.time)
-        {
-            if (!isRecoiling)
-            {
-                Shoot();
-                nextFireTime = Time.time + fireRate;
-            }
-
         }
         else if(distanceFromPlayer <= shootingRange)
         {
             rb.rotation = angle;
+            if (!isRecoiling && nextFireTime <Time.time)
+            {
+                Shoot();
+            }
         }
         else
         {
+            //for debug
             rb.angularVelocity = 0f;        
         }
     }
@@ -87,6 +83,8 @@ public class mob_handGun : MobBase
     {
         var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
         spawnedBullet.AddForce(barrel.up * bulletspeed);
+        nextFireTime = Time.time + fireRate;
+
         
         Vector2 recoilDirection = (transform.position - barrel.position).normalized;
         isRecoiling = true;
@@ -98,19 +96,8 @@ public class mob_handGun : MobBase
     {
         yield return new WaitForSeconds(recoilDuration);  // 等待一段時間
         isRecoiling = false;
-
-        // 停止後座力影響，將速度設置為零
-        rb.velocity = Vector2.zero;  // 停止敵人的移動
-        if (Vector2.Distance(John.position, transform.position) <= shootingRange)
-        {
-            // 繼續射擊邏輯
-            nextFireTime = Time.time + fireRate;
-        }
-        else
-        {
-            // 恢復正常的追擊速度
-            transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-        }
+        rb.velocity = Vector2.zero;  // 停止後座力影響，將速度設置為零
+        
     }
     private void OnDrawGizmosSelected()
     {
