@@ -6,10 +6,10 @@ public class mob_shotGun : MobBase
 {
    private Transform John;
    public Transform barrel;
-   public Transform barrel50;
+   public Transform barrel80;
    public Transform barrel70;   
    public Transform barrel110;
-   public Transform barrel130;
+   public Transform barrel100;
 
    public Rigidbody2D bullet;
    private Rigidbody2D rb;
@@ -20,6 +20,9 @@ public class mob_shotGun : MobBase
    public float shootingRange;
    public float hearingRange;
    public float lineOfDetect;
+
+   public float bulletCount = 2; // 要連續發射的子彈數量
+   public float interval = 1f; // 每顆子彈之間的時間間隔
    [Range(0.4f,5f)] public float fireRate;
    public float nextFireTime;
    public float recoilForce = 5f;     // 後座力大小
@@ -60,7 +63,8 @@ public class mob_shotGun : MobBase
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
                 while(nextFireTime <Time.time)
                {
-                Shoot();
+                //Shoot();
+                StartCoroutine(ShootBullets());
                 nextFireTime = Time.time + fireRate;
                }
             }
@@ -74,7 +78,8 @@ public class mob_shotGun : MobBase
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
                  while(nextFireTime <Time.time)
                 {
-                  Shoot();
+                  //oneShoot();
+                  StartCoroutine(ShootBullets());
                   nextFireTime = Time.time + fireRate;
                 }
             }
@@ -84,7 +89,8 @@ public class mob_shotGun : MobBase
         {
             if (!isRecoiling)
             {
-              Shoot();
+              //oneShoot();
+              StartCoroutine(ShootBullets());
               nextFireTime = Time.time + fireRate;            
             }
         }
@@ -102,18 +108,19 @@ public class mob_shotGun : MobBase
         shotSound = true; 
     }
     
-    private void Shoot()
+    //shootOnce
+    /*private void Shoot()
     {
         var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
         spawnedBullet.AddForce(barrel.up * bulletspeed);
-        var spawnedBullet2 =Instantiate(bullet, barrel50.position, barrel50.rotation);
-        spawnedBullet2.AddForce(barrel50.up * bulletspeed);
+        var spawnedBullet2 =Instantiate(bullet, barrel80.position, barrel80.rotation);
+        spawnedBullet2.AddForce(barrel80.up * bulletspeed);
         var spawnedBullet3 =Instantiate(bullet, barrel70.position, barrel70.rotation);
         spawnedBullet3.AddForce(barrel70.up * bulletspeed);
         var spawnedBullet4 =Instantiate(bullet, barrel110.position, barrel110.rotation);
         spawnedBullet4.AddForce(barrel110.up * bulletspeed);
-        var spawnedBullet5 =Instantiate(bullet, barrel130.position, barrel130.rotation);
-        spawnedBullet5.AddForce(barrel130.up * bulletspeed);
+        var spawnedBullet5 =Instantiate(bullet, barrel100.position, barrel100.rotation);
+        spawnedBullet5.AddForce(barrel100.up * bulletspeed);
                 
 
         Vector2 recoilDirection = (transform.position - barrel.position).normalized;
@@ -122,7 +129,33 @@ public class mob_shotGun : MobBase
         rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
         StartCoroutine(StopRecoilAfterDelay());
         
+    }*/
+    private IEnumerator ShootBullets()
+{
+    for (int i = 0; i < bulletCount; i++)
+    {
+        // 生成子彈
+        var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
+        spawnedBullet.AddForce(barrel.up * bulletspeed);
+        var spawnedBullet2 =Instantiate(bullet, barrel80.position, barrel80.rotation);
+        spawnedBullet2.AddForce(barrel80.up * bulletspeed);
+        var spawnedBullet3 =Instantiate(bullet, barrel70.position, barrel70.rotation);
+        spawnedBullet3.AddForce(barrel70.up * bulletspeed);
+        var spawnedBullet4 =Instantiate(bullet, barrel110.position, barrel110.rotation);
+        spawnedBullet4.AddForce(barrel110.up * bulletspeed);
+        var spawnedBullet5 =Instantiate(bullet, barrel100.position, barrel100.rotation);
+        spawnedBullet5.AddForce(barrel100.up * bulletspeed);
+
+        Vector2 recoilDirection = (transform.position - barrel.position).normalized;
+        isRecoiling = true;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
+        StartCoroutine(StopRecoilAfterDelay());
+
+        // 等待間隔時間
+        yield return new WaitForSeconds(interval);
     }
+}
 
    IEnumerator StopRecoilAfterDelay()
     {
