@@ -6,6 +6,11 @@ public class mob_shotGun : MobBase
 {
    private Transform John;
    public Transform barrel;
+   public Transform barrel50;
+   public Transform barrel70;   
+   public Transform barrel110;
+   public Transform barrel130;
+
    public Rigidbody2D bullet;
    private Rigidbody2D rb;
    private bool shotSound = false;
@@ -99,42 +104,24 @@ public class mob_shotGun : MobBase
     
     private void Shoot()
     {
+        var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
+        spawnedBullet.AddForce(barrel.up * bulletspeed);
+        var spawnedBullet2 =Instantiate(bullet, barrel50.position, barrel50.rotation);
+        spawnedBullet2.AddForce(barrel50.up * bulletspeed);
+        var spawnedBullet3 =Instantiate(bullet, barrel70.position, barrel70.rotation);
+        spawnedBullet3.AddForce(barrel70.up * bulletspeed);
+        var spawnedBullet4 =Instantiate(bullet, barrel110.position, barrel110.rotation);
+        spawnedBullet4.AddForce(barrel110.up * bulletspeed);
+        var spawnedBullet5 =Instantiate(bullet, barrel130.position, barrel130.rotation);
+        spawnedBullet5.AddForce(barrel130.up * bulletspeed);
+                
 
-        for (int i = 0; i < 7; i++)
-        {
-        // 生成子彈
-            var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
-            switch(i)
-            {
-                case 0:
-                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,-90,0f));
-                    break;
-                case 1:
-                    spawnedBullet.AddForce(barrel.up * bulletspeed+ new Vector3(0f,90f,0f));
-                    break;
-                case 2:
-                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,0f,0f));
-                    break;
-                case 3:
-                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,45f,0f));
-                    break;
-                case 4:
-                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,-45f,0f));
-                    break;
-                case 5:
-                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,20f,50f));
-                    break;
-                case 6:
-                    spawnedBullet.AddForce(barrel.up * bulletspeed + new Vector3(0f,-20f,50f));
-                    break;
-            }
-
-            Vector2 recoilDirection = (transform.position - barrel.position).normalized;
-            isRecoiling = true;
-            rb.velocity = Vector2.zero;
-            rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
-            StartCoroutine(StopRecoilAfterDelay());
-        }
+        Vector2 recoilDirection = (transform.position - barrel.position).normalized;
+        isRecoiling = true;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
+        StartCoroutine(StopRecoilAfterDelay());
+        
     }
 
    IEnumerator StopRecoilAfterDelay()

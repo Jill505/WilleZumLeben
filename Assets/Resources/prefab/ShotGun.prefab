@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1059633461571225807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3061745065187363048}
+  m_Layer: 0
+  m_Name: barrel110
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3061745065187363048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059633461571225807}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.8191521, w: 0.57357645}
+  m_LocalPosition: {x: 0.6258, y: -0, z: 0}
+  m_LocalScale: {x: 0.63770765, y: 0.724578, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4351847466200382650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -110}
+--- !u!1 &1282065978127804080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2474534582041794493}
+  m_Layer: 0
+  m_Name: barrel130
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2474534582041794493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282065978127804080}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.9063079, w: 0.42261827}
+  m_LocalPosition: {x: 0.6258, y: -0, z: 0}
+  m_LocalScale: {x: 0.63770765, y: 0.724578, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4351847466200382650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -130}
+--- !u!1 &2064014689797053344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3343665702637424613}
+  m_Layer: 0
+  m_Name: barrel50
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3343665702637424613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064014689797053344}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.42261827, w: 0.9063079}
+  m_LocalPosition: {x: 0.6258, y: -0, z: 0}
+  m_LocalScale: {x: 0.63770765, y: 0.724578, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4351847466200382650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50}
 --- !u!1 &5195841769789579976
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,6 +177,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5446109927210006267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6236121351150827201}
+  m_Layer: 0
+  m_Name: barrel70
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6236121351150827201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5446109927210006267}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.5735764, w: 0.8191521}
+  m_LocalPosition: {x: 0.6258, y: -0, z: 0}
+  m_LocalScale: {x: 0.63770765, y: 0.724578, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4351847466200382650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -70}
 --- !u!1 &5700477263701807370
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +242,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8433093809040745626}
+  - {fileID: 3343665702637424613}
+  - {fileID: 6236121351150827201}
+  - {fileID: 3061745065187363048}
+  - {fileID: 2474534582041794493}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1004905029765748793
@@ -215,17 +343,20 @@ MonoBehaviour:
   animationDuration: 1
   deadSoundEffect: {fileID: 2402184908248874388, guid: abad39a2c7837064cb80db17d33302b1, type: 3}
   hitSoundEffect: {fileID: 2281027897876956882, guid: 64f05843c22dacd44867f597c3eedc0d, type: 3}
-  bulletspeed: 500
+  barrel: {fileID: 8433093809040745626}
+  barrel50: {fileID: 3343665702637424613}
+  barrel70: {fileID: 6236121351150827201}
+  barrel110: {fileID: 3061745065187363048}
+  barrel130: {fileID: 2474534582041794493}
+  bullet: {fileID: 6786766868604449820, guid: 744cbaeddcbe0684dbd6953957261a2e, type: 3}
+  bulletspeed: 300
   shootingRange: 3.19
   hearingRange: 6.95
   lineOfDetect: 4.89
-  bulletCount: 5
   fireRate: 5
   nextFireTime: 0
   recoilForce: 1.7
   recoilDuration: 0.2
-  bullet: {fileID: 6786766868604449820, guid: 744cbaeddcbe0684dbd6953957261a2e, type: 3}
-  barrel: {fileID: 8433093809040745626}
 --- !u!58 &3815267317896538846
 CircleCollider2D:
   m_ObjectHideFlags: 0
