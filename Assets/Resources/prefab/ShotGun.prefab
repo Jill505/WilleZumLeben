@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  speed: 1
+  speed: 2
   deadFromDiraction: 0
   isDead: 0
   timeCurve:
@@ -349,10 +349,12 @@ MonoBehaviour:
   barrel110: {fileID: 3061745065187363048}
   barrel100: {fileID: 2474534582041794493}
   bullet: {fileID: 6786766868604449820, guid: 744cbaeddcbe0684dbd6953957261a2e, type: 3}
-  bulletspeed: 300
+  bulletspeed: 500
   shootingRange: 3.19
   hearingRange: 6.95
   lineOfDetect: 4.89
+  bulletCount: 2
+  interval: 1
   fireRate: 3
   nextFireTime: 0
   recoilForce: 1.7
