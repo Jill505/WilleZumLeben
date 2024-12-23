@@ -305,7 +305,7 @@ public class May_Control : MonoBehaviour
                 Vector2 dashForceWithDirection = directionVector * mayDashForce;
                 Debug.Log("Dash Force Vector: " + dashForceWithDirection);
                 //rb2d.AddForce(dashForceWithDirection);
-                rb2d.velocity += dashForceWithDirection;
+                rb2d.velocity = dashForceWithDirection;
 
                 mayPointer.SetActive(false);
                 isAttacking = true;
