@@ -8,7 +8,6 @@ public class mobtest : MobBase
     public Transform barrel;
     public Rigidbody2D bullet;
     private Rigidbody2D rb;
-    private bool shotSound = false;
     [Header ("Shoot")]
     public float bulletspeed = 500f;
     [Range(0.2f, 4f)] public float fireRate;
@@ -26,7 +25,6 @@ public class mobtest : MobBase
 
     [Header ("Range")]
     public float shootingRange;
-    public float hearingRange;
     public float lineOfDetect;
 
 
@@ -34,7 +32,6 @@ public class mobtest : MobBase
     {
         rb = GetComponent<Rigidbody2D>();
         John = GameObject.FindGameObjectWithTag("John").transform;
-        JohnTest.OnPlayerShot += hearing;
     }
 
     void FixedUpdate()
@@ -43,22 +40,18 @@ public class mobtest : MobBase
         {
             return;
         }
-
+        Move();
+        
+    }
+    void Move()
+    {
         Vector3 direction = John.position - transform.position; // 得到兩個物件在 x, y, z 軸上各自的距離差
 
         // 計算角度
         float angleToPlayer = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float distanceFromPlayer = Vector2.Distance(John.position, transform.position);
 
-        if (distanceFromPlayer < hearingRange && distanceFromPlayer > lineOfDetect && shotSound)
-        {
-            rb.rotation = angleToPlayer;
-            if (!isRecoiling)
-            {
-                transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-            }
-        }
-        else if (distanceFromPlayer < lineOfDetect && distanceFromPlayer > shootingRange && !isOrbiting)
+        if (distanceFromPlayer < lineOfDetect && distanceFromPlayer > shootingRange && !isOrbiting)
         {
             rb.rotation = angleToPlayer;
             InitializeOrbit();
@@ -142,10 +135,7 @@ public class mobtest : MobBase
 
         isOrbiting = true;  // 標記敵人已開始繞圈
     }
-    void hearing()
-    {
-        shotSound = true; 
-    }
+    
 
     void Shoot()
     {
@@ -182,8 +172,5 @@ public class mobtest : MobBase
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, shootingRange);
-
-        Gizmos.color = Color.red; // 聽力範圍用紅色
-        Gizmos.DrawWireSphere(transform.position, hearingRange);
     }
 }

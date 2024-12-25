@@ -7,7 +7,6 @@ public class mob_shieldBearer : MobBase
    private Transform John;
    public Transform Shield;
    private Rigidbody2D rb;
-   private bool shotSound = false;
 
    [Header ("Attack")]
    public float BashTime = 5f;
@@ -16,14 +15,12 @@ public class mob_shieldBearer : MobBase
 
    [Header ("Range")]
    public float AttackRange;
-   public float hearingRange;
    public float lineOfDetect;
    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         John = GameObject.FindGameObjectWithTag("John").transform;
-        JohnTest.OnPlayerShot += hearing;
     }
 
     void FixedUpdate()
@@ -32,19 +29,19 @@ public class mob_shieldBearer : MobBase
         {
             return;
         }
-
+        Move();
+        
+    }
+   
+    void Move()
+    {
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
         
         // 計算角度
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
         
-        if (distanceFromPlayer < hearingRange && distanceFromPlayer > lineOfDetect && shotSound)
-        {
-            rb.rotation = angle;
-            transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-        }
-        else if (distanceFromPlayer < lineOfDetect && distanceFromPlayer > AttackRange)
+        if (distanceFromPlayer < lineOfDetect && distanceFromPlayer > AttackRange)
         {
             rb.rotation = angle;
             transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
@@ -67,11 +64,6 @@ public class mob_shieldBearer : MobBase
             rb.angularVelocity = 0f;        
         }
     }
-    void hearing()
-    {
-        shotSound = true; 
-    }
-
     void Bash()
     {
         rb.AddForce(Shield.right * 20f,ForceMode2D.Impulse);
@@ -90,8 +82,5 @@ public class mob_shieldBearer : MobBase
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position , AttackRange);
-
-        Gizmos.color = Color.red; // 聽力範圍用紅色
-        Gizmos.DrawWireSphere(transform.position, hearingRange );    
     }
 }

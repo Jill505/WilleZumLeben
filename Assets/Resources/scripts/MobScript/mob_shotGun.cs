@@ -13,7 +13,6 @@ public class mob_shotGun : MobBase
 
    public Rigidbody2D bullet;
    private Rigidbody2D rb;
-   private bool shotSound = false;
 
    [Header ("Shoot")]
    public float bulletspeed = 500f;
@@ -29,7 +28,6 @@ public class mob_shotGun : MobBase
 
    [Header ("Range")]
    public float shootingRange;
-   public float hearingRange;
    public float lineOfDetect;
    
 
@@ -39,7 +37,6 @@ public class mob_shotGun : MobBase
     {
         rb = GetComponent<Rigidbody2D>();
         John = GameObject.FindGameObjectWithTag("John").transform;
-        JohnTest.OnPlayerShot += hearing;                         
     }
 
     void FixedUpdate()
@@ -48,7 +45,12 @@ public class mob_shotGun : MobBase
         {
             return;
         }
+        Move();
         
+    }
+    
+    void Move()
+    {
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
         Vector2 rayDirection = Vector2.left;
         
@@ -56,20 +58,7 @@ public class mob_shotGun : MobBase
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
 
-        if (distanceFromPlayer < hearingRange && distanceFromPlayer > lineOfDetect && shotSound)
-        {
-            if (!isRecoiling)
-            {
-                transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-                while(nextFireTime <Time.time)
-               {
-                nextFireTime = Time.time + fireRate;
-               }
-            }
-            rb.rotation = angle;
-           
-        }
-        else if (distanceFromPlayer <lineOfDetect && distanceFromPlayer>shootingRange)
+        if (distanceFromPlayer <lineOfDetect && distanceFromPlayer>shootingRange)
         {
             if (!isRecoiling)
             {
@@ -116,10 +105,6 @@ public class mob_shotGun : MobBase
         {
             rb.angularVelocity = 0f;
         }
-    }
-    void hearing()
-    {
-        shotSound = true; 
     }
     
     //shootOnce
@@ -196,10 +181,5 @@ public class mob_shotGun : MobBase
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position , shootingRange);
-
-        Gizmos.color = Color.red; // 聽力範圍用紅色
-        Gizmos.DrawWireSphere(transform.position, hearingRange ); 
-
-        
     }
 }

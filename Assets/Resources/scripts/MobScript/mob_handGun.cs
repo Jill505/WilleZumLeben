@@ -8,7 +8,6 @@ public class mob_handGun : MobBase
    public Transform barrel;
    public Rigidbody2D bullet;
    private Rigidbody2D rb;
-   private bool shotSound = false;
 
    [Header ("Shoot")]
    public float bulletspeed = 500f;
@@ -21,14 +20,12 @@ public class mob_handGun : MobBase
    private bool isRecoiling = false;  
    [Header ("Range")]
    public float shootingRange;
-   public float hearingRange;
    public float lineOfDetect;
    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         John = GameObject.FindGameObjectWithTag("John").transform;
-        JohnTest.OnPlayerShot += hearing;
     }
 
     void FixedUpdate()
@@ -37,13 +34,10 @@ public class mob_handGun : MobBase
         {
             return;
         }
-        
+
         Move();
     }
-    void hearing()
-    {
-        shotSound = true; 
-    }
+    
 
     void Move()
     {
@@ -53,15 +47,7 @@ public class mob_handGun : MobBase
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
         
-        if (distanceFromPlayer < hearingRange && distanceFromPlayer > lineOfDetect && shotSound)
-        {
-            rb.rotation = angle;
-            if (!isRecoiling)
-            {
-                transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-            }
-        }
-        else if (distanceFromPlayer < lineOfDetect && distanceFromPlayer > shootingRange)
+        if (distanceFromPlayer < lineOfDetect && distanceFromPlayer > shootingRange)
         {
             rb.rotation = angle;
             if (!isRecoiling)
@@ -121,9 +107,6 @@ public class mob_handGun : MobBase
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position , shootingRange);
-
-        Gizmos.color = Color.red; // 聽力範圍用紅色
-        Gizmos.DrawWireSphere(transform.position, hearingRange );    
     }
     
 }

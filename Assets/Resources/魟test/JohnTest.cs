@@ -8,8 +8,7 @@ public class JohnTest : MonoBehaviour
     public Rigidbody2D rb2d;
     public GameObject johnBullet;
     public GameObject johnBarrelPosition;
-    public delegate void PlayerShot();   //delegate是一個委託類型
-    public static event PlayerShot OnPlayerShot; //基於委託底下的定義事件，用於通知其他對象某些動作的發生
+    
 
     public bool johnControlAble = true;
 
@@ -187,10 +186,7 @@ public class JohnTest : MonoBehaviour
             //johnBullet.transform.rotation = Quaternion.Euler(0, 0, facingDiraction * Mathf.Rad2Deg);
 
             Instantiate(pistolShootSoundEffect);
-            if (OnPlayerShot != null)
-            {
-                OnPlayerShot.Invoke();
-            }
+            
 
             //��y�O
 
