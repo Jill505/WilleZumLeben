@@ -72,8 +72,8 @@ public class May_Control : MonoBehaviour
     {
         if (All_GameCore.OperatorMode == 0)//Solo
         {
-            //soloTargetPos();
-            following();
+            soloTargetPos();
+            //following();
             MaySoloAttack();
             AngerUISync();
         }
@@ -87,31 +87,41 @@ public class May_Control : MonoBehaviour
     {
         if (isTracking && mayControlalbe)
         {
-
+            
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 //設定目標位置
-                Vector2 mousePosition = Input.mousePosition;
-                Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                //Vector2 mousePosition = Input.mousePosition;
+                Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 targetPos = worldMousePosition;
+
+                Debug.Log(worldMousePosition);
 
                 moveMissionActing = true;
 
                 //生成一個小動畫
+
             }
 
-            if (targetPos == (Vector2)gameObject.transform.position)
+            if (moveMissionActing)
             {
-                //減速 不要直接停止
-                moveMissionActing = false;
-                rb2d.velocity = Vector2.zero;
-            }
-            else
-            {
-                //character move to target position tracking
-                //Vector2 theVec = (Vector2)gameObject.transform.position - targetPos;
-                //float diraction = Mathf.Atan2(theVec.y,theVec.x);
-                //rb2d.velocity = targetPos * maySpeed;
+                if (targetPos == (Vector2)gameObject.transform.position)
+                {
+                    //減速 不要直接停止
+                    moveMissionActing = false;
+                    rb2d.velocity = Vector2.zero;
+                }
+                else
+                {
+                    //character move to target position tracking
+                    Vector2 theVec = (targetPos-(Vector2)gameObject.transform.position).normalized;
+                    //float diraction = Mathf.Atan2(theVec.y,theVec.x);
+                    rb2d.velocity = theVec * maySpeed;
+
+                    Debug.Log("my position is" + transform.position +"/target pos is" + targetPos);
+                    Debug.Log(theVec + "The Rect");
+                }
+
             }
 
             if (moveMissionActing)
