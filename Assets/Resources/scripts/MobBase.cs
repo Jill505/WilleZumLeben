@@ -20,6 +20,7 @@ public class MobBase : MonoBehaviour
 
     private float timer = 10f;
     private float alpha = 0.5f;
+    private bool hasPlayedDeath = false;
 
     public GameObject deadSoundEffect;
     public GameObject hitSoundEffect;
@@ -61,7 +62,11 @@ public class MobBase : MonoBehaviour
 
             timer = 0;
             isDead = true;
-            Dead();
+            if(!hasPlayedDeath)
+            {
+                Dead();
+                hasPlayedDeath = true;
+            }
 
         }
     }

@@ -14,20 +14,24 @@ public class mob_shotGun : MobBase
    public Rigidbody2D bullet;
    private Rigidbody2D rb;
    private bool shotSound = false;
-   private int i = 0;
 
+   [Header ("Shoot")]
    public float bulletspeed = 500f;
-   public float shootingRange;
-   public float hearingRange;
-   public float lineOfDetect;
-
    public float bulletCount = 2; // 要連續發射的子彈數量
    public float interval = 1f; // 每顆子彈之間的時間間隔
    [Range(0.4f,5f)] public float fireRate;
-   public float nextFireTime;
+   float rotationTimer = 0f; 
+   float requiredTime = 1f; 
+   private float nextFireTime;
    public float recoilForce = 5f;     // 後座力大小
    public float recoilDuration = 0.5f;
    private bool isRecoiling = false;  
+
+   [Header ("Range")]
+   public float shootingRange;
+   public float hearingRange;
+   public float lineOfDetect;
+   
 
 
 
@@ -35,22 +39,18 @@ public class mob_shotGun : MobBase
     {
         rb = GetComponent<Rigidbody2D>();
         John = GameObject.FindGameObjectWithTag("John").transform;
-        JohnTest.OnPlayerShot += hearing;                                        //商討一下需要在主John那加入些委託
+        JohnTest.OnPlayerShot += hearing;                         
     }
 
     void FixedUpdate()
     {
         if(isDead) 
         {
-        while(i<=1)
-        {
-            Dead();
-            i++;
-        }
-        return;
+            return;
         }
         
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
+        Vector2 rayDirection = Vector2.left;
         
         // 計算角度
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -63,8 +63,6 @@ public class mob_shotGun : MobBase
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
                 while(nextFireTime <Time.time)
                {
-                //Shoot();
-                StartCoroutine(ShootBullets());
                 nextFireTime = Time.time + fireRate;
                }
             }
@@ -76,12 +74,18 @@ public class mob_shotGun : MobBase
             if (!isRecoiling)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-                 while(nextFireTime <Time.time)
-                {
-                  //oneShoot();
-                  StartCoroutine(ShootBullets());
-                  nextFireTime = Time.time + fireRate;
-                }
+                 if (!isRecoiling && nextFireTime <Time.time)
+                 {
+                    //forDebug
+                    rotationTimer += Time.deltaTime;
+                
+                    if (rotationTimer >= requiredTime)
+                    {
+                        StartCoroutine(ShootBullets());
+                        rotationTimer = 0f; 
+                        nextFireTime = Time.time + fireRate; 
+                    }
+                 }
             }
             rb.rotation = angle;
         }
@@ -89,10 +93,20 @@ public class mob_shotGun : MobBase
         {
             if (!isRecoiling)
             {
-              //oneShoot();
-              StartCoroutine(ShootBullets());
-              nextFireTime = Time.time + fireRate;            
+              if (!isRecoiling && nextFireTime <Time.time)
+                 {
+                    //forDebug
+                    rotationTimer += Time.deltaTime;
+                
+                    if (rotationTimer >= requiredTime)
+                    {
+                        StartCoroutine(ShootBullets());
+                        rotationTimer = 0f; 
+                        nextFireTime = Time.time + fireRate; 
+                    }
+                 }     
             }
+            rb.rotation = angle;
         }
         else if(distanceFromPlayer <= shootingRange)
         {
@@ -184,5 +198,8 @@ public class mob_shotGun : MobBase
         Gizmos.DrawWireSphere(transform.position , shootingRange);
 
         Gizmos.color = Color.red; // 聽力範圍用紅色
-        Gizmos.DrawWireSphere(transform.position, hearingRange );    }
+        Gizmos.DrawWireSphere(transform.position, hearingRange ); 
+
+        
+    }
 }

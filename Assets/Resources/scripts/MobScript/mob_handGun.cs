@@ -9,16 +9,20 @@ public class mob_handGun : MobBase
    public Rigidbody2D bullet;
    private Rigidbody2D rb;
    private bool shotSound = false;
-   private int i = 0;
+
+   [Header ("Shoot")]
    public float bulletspeed = 500f;
+   [Range(0.2f,4f)] public float fireRate;
+   float rotationTimer = 0f; 
+   float requiredTime = 1f; 
+   private float nextFireTime = 0f;
+   public float recoilForce = 5f;     
+   public float recoilDuration = 0.5f;
+   private bool isRecoiling = false;  
+   [Header ("Range")]
    public float shootingRange;
    public float hearingRange;
    public float lineOfDetect;
-   [Range(0.2f,4f)] public float fireRate;
-   private float nextFireTime = 0f;
-   public float recoilForce = 5f;     // 後座力大小
-   public float recoilDuration = 0.5f;
-   private bool isRecoiling = false;  
    
     void Start()
     {
@@ -27,23 +31,28 @@ public class mob_handGun : MobBase
         JohnTest.OnPlayerShot += hearing;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(isDead) 
         {
-        while(i<=1)
-        {
-            Dead();
-            i++;
+            return;
         }
-        return;
-        }
+        
+        Move();
+    }
+    void hearing()
+    {
+        shotSound = true; 
+    }
 
+    void Move()
+    {
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
         
         // 計算角度
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
+        
         if (distanceFromPlayer < hearingRange && distanceFromPlayer > lineOfDetect && shotSound)
         {
             rb.rotation = angle;
@@ -58,6 +67,17 @@ public class mob_handGun : MobBase
             if (!isRecoiling)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
+            }
+            if (!isRecoiling && nextFireTime <Time.time)
+            {
+                //forDebug
+                rotationTimer += Time.deltaTime;
+                
+                if (rotationTimer >= requiredTime)
+                {
+                    Shoot();
+                    rotationTimer = 0f; 
+                }
             }
         }
         else if(distanceFromPlayer <= shootingRange)
@@ -74,11 +94,6 @@ public class mob_handGun : MobBase
             rb.angularVelocity = 0f;        
         }
     }
-    void hearing()
-    {
-        shotSound = true; 
-    }
-
     void Shoot()
     {
         var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
@@ -110,4 +125,5 @@ public class mob_handGun : MobBase
         Gizmos.color = Color.red; // 聽力範圍用紅色
         Gizmos.DrawWireSphere(transform.position, hearingRange );    
     }
+    
 }

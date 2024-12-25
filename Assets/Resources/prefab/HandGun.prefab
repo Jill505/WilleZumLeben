@@ -131,16 +131,15 @@ MonoBehaviour:
   animationDuration: 1
   deadSoundEffect: {fileID: 2281027897876956882, guid: 64f05843c22dacd44867f597c3eedc0d, type: 3}
   hitSoundEffect: {fileID: 8780462911014771537, guid: 6e6756bce2f571e4284f4e0c6b25ffde, type: 3}
+  barrel: {fileID: 7188291252164669281}
+  bullet: {fileID: 6786766868604449820, guid: 744cbaeddcbe0684dbd6953957261a2e, type: 3}
   bulletspeed: 500
   shootingRange: 3.22
   hearingRange: 12.5
   lineOfDetect: 4.93
   fireRate: 1
-  nextFireTime: 0
   recoilForce: 1.7
   recoilDuration: 0.2
-  bullet: {fileID: 6786766868604449820, guid: 744cbaeddcbe0684dbd6953957261a2e, type: 3}
-  barrel: {fileID: 7188291252164669281}
 --- !u!50 &1778018362365408809
 Rigidbody2D:
   serializedVersion: 4

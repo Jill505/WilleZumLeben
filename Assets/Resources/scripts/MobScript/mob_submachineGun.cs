@@ -9,19 +9,22 @@ public class mob_submachineGun : MobBase
    public Rigidbody2D bullet;
    private Rigidbody2D rb;
    private bool shotSound = false;
-   private int i = 0;
-
-   public float bulletspeed;
-   public float shootingRange;
-   public float hearingRange;
-   public float lineOfDetect;
+   [Header ("Shoot")]
+   public float bulletspeed = 500f;
    public float bulletCount = 10; // 要連續發射的子彈數量
    public float interval = 0.1f; // 每顆子彈之間的時間間隔
    [Range(0.4f,5f)] public float fireRate;
+   float rotationTimer = 0f; 
+   float requiredTime = 1f; 
    private float nextFireTime;
    public float recoilForce = 5f;     // 後座力大小
    public float recoilDuration = 0.5f;
    private bool isRecoiling = false;  
+
+   [Header ("Range")]
+   public float shootingRange;
+   public float hearingRange;
+   public float lineOfDetect;
 
 
 
@@ -36,12 +39,7 @@ public class mob_submachineGun : MobBase
     {
         if(isDead) 
         {
-        while(i<=1)
-        {
-            Dead();
-            i++;
-        }
-        return;
+            return;
         }
         
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
@@ -56,11 +54,19 @@ public class mob_submachineGun : MobBase
             if (!isRecoiling)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-                while(nextFireTime <Time.time)
-               {
-                StartCoroutine(ShootBullets());
-                nextFireTime = Time.time + fireRate;
-               }
+                while (nextFireTime <Time.time)
+                 {
+                    //forDebug
+                    rotationTimer += Time.deltaTime;
+                
+                    if (rotationTimer >= requiredTime)
+                    {
+                        StartCoroutine(ShootBullets());
+                        rotationTimer = 0f; 
+                        nextFireTime = Time.time + fireRate; 
+                    }
+                 }
+                
             }           
         }
         else if (distanceFromPlayer <lineOfDetect && distanceFromPlayer>shootingRange)
@@ -69,21 +75,35 @@ public class mob_submachineGun : MobBase
             if (!isRecoiling)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-                 while(nextFireTime <Time.time)
-                {
-                  StartCoroutine(ShootBullets());
-                  nextFireTime = Time.time + fireRate;
-                }
+                 while (nextFireTime <Time.time)
+                 {
+                    //forDebug
+                    rotationTimer += Time.deltaTime;
+                
+                    if (rotationTimer >= requiredTime)
+                    {
+                        StartCoroutine(ShootBullets());
+                        rotationTimer = 0f; 
+                        nextFireTime = Time.time + fireRate; 
+                    }
+                 }
             }
         }
         else if(distanceFromPlayer <= shootingRange)
         {
             rb.rotation = angle;
-            if (!isRecoiling && nextFireTime <Time.time)
-            {
-              StartCoroutine(ShootBullets());
-              nextFireTime = Time.time + fireRate;            
-            }
+            while (nextFireTime <Time.time)
+                 {
+                    //forDebug
+                    rotationTimer += Time.deltaTime;
+                
+                    if (rotationTimer >= requiredTime)
+                    {
+                        StartCoroutine(ShootBullets());
+                        rotationTimer = 0f; 
+                        nextFireTime = Time.time + fireRate; 
+                    }
+                 }
         }
         else
         {
