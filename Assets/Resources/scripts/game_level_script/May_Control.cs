@@ -353,4 +353,15 @@ public class May_Control : MonoBehaviour
     {
         rb2d.velocity = new Vector2 (rb2d.velocity.x * slowDownRate ,rb2d.velocity.y * slowDownRate);
     }
+
+
+    public void mayStun(float seconds)
+    {
+        mayControlalbe = false;
+        Invoke("mayStunInvoke", seconds);
+    }
+    public void mayStunInvoke()
+    {
+        mayControlalbe = true;
+    }
 }
