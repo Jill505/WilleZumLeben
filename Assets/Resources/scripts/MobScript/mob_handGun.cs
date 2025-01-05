@@ -11,16 +11,23 @@ public class mob_handGun : MobBase
 
    [Header ("Shoot")]
    public float bulletspeed = 500f;
-   [Range(0.2f,4f)] public float fireRate;
-   float rotationTimer = 0f; 
-   float requiredTime = 1f; 
+   [Range(0.2f,4f)] public float fireRate;   
    private float nextFireTime = 0f;
+
+   [Header ("Recoil")]
    public float recoilForce = 5f;     
    public float recoilDuration = 0.5f;
-   private bool isRecoiling = false;  
+   private bool isRecoiling = false; 
+
    [Header ("Range")]
-   public float shootingRange;
-   public float lineOfDetect;
+   public float chaseRange;
+   public float stopRange;
+
+   #region Debug
+   private float rotationTimer = 0f; 
+   private float requiredTime = 1f;    
+   
+   #endregion
    
     void Start()
     {
@@ -34,7 +41,6 @@ public class mob_handGun : MobBase
         {
             return;
         }
-
         Move();
     }
     
@@ -43,11 +49,10 @@ public class mob_handGun : MobBase
     {
         Vector3 direction = John.position - transform.position; //得到兩個物件在 x, y, z 軸上各自的距離差
         
-        // 計算角度
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
+        float distanceFromPlayer = Vector2.Distance(John.position , transform.position);
         
-        if (distanceFromPlayer < lineOfDetect && distanceFromPlayer > shootingRange)
+        if (distanceFromPlayer < chaseRange && distanceFromPlayer > stopRange)
         {
             rb.rotation = angle;
             if (!isRecoiling)
@@ -66,7 +71,7 @@ public class mob_handGun : MobBase
                 }
             }
         }
-        else if(distanceFromPlayer <= shootingRange)
+        else if(distanceFromPlayer <= stopRange)
         {
             rb.rotation = angle;
             if (!isRecoiling && nextFireTime <Time.time)
@@ -85,8 +90,11 @@ public class mob_handGun : MobBase
         var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
         spawnedBullet.AddForce(barrel.up * bulletspeed);
         nextFireTime = Time.time + fireRate;
+        Recoil();
+    }
 
-        
+    void Recoil()
+    {
         Vector2 recoilDirection = (transform.position - barrel.position).normalized;
         isRecoiling = true;
         rb.velocity = Vector2.zero;
@@ -103,10 +111,10 @@ public class mob_handGun : MobBase
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position , lineOfDetect);
+        Gizmos.DrawWireSphere(transform.position , chaseRange);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position , shootingRange);
+        Gizmos.DrawWireSphere(transform.position , stopRange);
     }
     
 }

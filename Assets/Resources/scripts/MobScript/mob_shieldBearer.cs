@@ -12,10 +12,12 @@ public class mob_shieldBearer : MobBase
    public float BashTime = 5f;
    private float chargeTimer = 0f; 
    public float chargeTime = 1f; 
+   public float BashCoolTime = 2f; 
+   private bool canBash = true;
 
    [Header ("Range")]
-   public float AttackRange;
-   public float lineOfDetect;
+   public float chaseRange;
+   public float stopRange;
    
     void Start()
     {
@@ -41,18 +43,18 @@ public class mob_shieldBearer : MobBase
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
         
-        if (distanceFromPlayer < lineOfDetect && distanceFromPlayer > AttackRange)
+        if (distanceFromPlayer < chaseRange && distanceFromPlayer > stopRange)
         {
             rb.rotation = angle;
             transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
             chargeTimer = 0f;
         }
-        else if(distanceFromPlayer <= AttackRange)
+        else if(distanceFromPlayer <= stopRange)
         {
             rb.rotation = angle;
             chargeTimer += Time.deltaTime;
                 
-                if (chargeTimer >= chargeTime)
+                if (chargeTimer >= chargeTime && canBash)
                 {
                     Bash();
                     chargeTimer = 0f; 
@@ -67,6 +69,7 @@ public class mob_shieldBearer : MobBase
     void Bash()
     {
         rb.AddForce(Shield.right * 20f,ForceMode2D.Impulse);
+        canBash = false;
         StartCoroutine(Stop());
     }
     IEnumerator Stop()
@@ -74,13 +77,15 @@ public class mob_shieldBearer : MobBase
         yield return new WaitForSeconds(BashTime);
         rb.velocity = Vector2.zero; 
         rb.angularVelocity = 0f;  
+        yield return new WaitForSeconds(BashCoolTime);
+        canBash = true;
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position , lineOfDetect);
+        Gizmos.DrawWireSphere(transform.position , chaseRange);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position , AttackRange);
+        Gizmos.DrawWireSphere(transform.position , stopRange);
     }
 }

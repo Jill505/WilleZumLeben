@@ -14,16 +14,22 @@ public class mob_submachineGun : MobBase
    public float bulletCount = 10; // 要連續發射的子彈數量
    public float interval = 0.1f; // 每顆子彈之間的時間間隔
    [Range(0.4f,5f)] public float fireRate;
-   float rotationTimer = 0f; 
-   float requiredTime = 1f; 
    private float nextFireTime;
+
+   [Header ("Recoil")]
    public float recoilForce = 5f;     // 後座力大小
    public float recoilDuration = 0.5f;
    private bool isRecoiling = false;  
 
    [Header ("Range")]
-   public float shootingRange;
-   public float lineOfDetect;
+   public float chaseRange;
+   public float stopRange;
+
+   #region Debug
+   private float rotationTimer = 0f; 
+   private float requiredTime = 1f;    
+   
+   #endregion
 
 
 
@@ -50,41 +56,39 @@ public class mob_submachineGun : MobBase
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float distanceFromPlayer =Vector2.Distance(John.position , transform.position);
 
-         if (distanceFromPlayer <lineOfDetect && distanceFromPlayer>shootingRange)
+         if (distanceFromPlayer < chaseRange && distanceFromPlayer > stopRange)
         {
             rb.rotation = angle;
             if (!isRecoiling)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, John.position, speed * Time.deltaTime);
-                 while (nextFireTime <Time.time)
-                 {
+                while (nextFireTime <Time.time)
+                {
                     //forDebug
                     rotationTimer += Time.deltaTime;
-                
                     if (rotationTimer >= requiredTime)
                     {
                         StartCoroutine(ShootBullets());
                         rotationTimer = 0f; 
                         nextFireTime = Time.time + fireRate; 
                     }
-                 }
+                }
             }
         }
-        else if(distanceFromPlayer <= shootingRange)
+        else if(distanceFromPlayer <= stopRange)
         {
             rb.rotation = angle;
             while (nextFireTime <Time.time)
-                 {
-                    //forDebug
-                    rotationTimer += Time.deltaTime;
-                
-                    if (rotationTimer >= requiredTime)
-                    {
-                        StartCoroutine(ShootBullets());
-                        rotationTimer = 0f; 
-                        nextFireTime = Time.time + fireRate; 
-                    }
-                 }
+            {
+                //forDebug
+                rotationTimer += Time.deltaTime;
+                if (rotationTimer >= requiredTime)
+                {
+                    StartCoroutine(ShootBullets());
+                    rotationTimer = 0f; 
+                    nextFireTime = Time.time + fireRate; 
+                }
+            }
         }
         else
         {
@@ -96,35 +100,34 @@ public class mob_submachineGun : MobBase
     {
         for (int i = 0; i < bulletCount; i++)
         {
-            // 生成子彈
             var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
             spawnedBullet.AddForce(barrel.up * bulletspeed);
-
-            Vector2 recoilDirection = (transform.position - barrel.position).normalized;
-            isRecoiling = true;
-            rb.velocity = Vector2.zero;
-            rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
-            StartCoroutine(StopRecoilAfterDelay());
-
-            // 等待間隔時間
+            Recoil();
             yield return new WaitForSeconds(interval);
         }
     }
+
+    void Recoil()
+    {
+        Vector2 recoilDirection = (transform.position - barrel.position).normalized;
+        isRecoiling = true;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
+        StartCoroutine(StopRecoilAfterDelay());
+    }
     IEnumerator StopRecoilAfterDelay()
     {
-        yield return new WaitForSeconds(recoilDuration);  // 等待一段時間
+        yield return new WaitForSeconds(recoilDuration);  
         isRecoiling = false;
-
-        // 停止後座力影響，將速度設置為零
-        rb.velocity = Vector2.zero;  // 停止敵人的移動
+        rb.velocity = Vector2.zero; 
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position , lineOfDetect);
+        Gizmos.DrawWireSphere(transform.position , chaseRange);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position , shootingRange);
+        Gizmos.DrawWireSphere(transform.position , stopRange);
 
     }
 }

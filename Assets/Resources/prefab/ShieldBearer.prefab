@@ -218,9 +218,9 @@ MonoBehaviour:
   Shield: {fileID: 6148146858353851781}
   BashTime: 0.1
   chargeTime: 0.5
-  AttackRange: 2.68
-  hearingRange: 12.26
-  lineOfDetect: 6.63
+  BashCoolTime: 2
+  chaseRange: 7.28
+  stopRange: 3.37
 --- !u!58 &7676587327443095758
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -7,11 +7,6 @@ public class mobBullet : MonoBehaviour
     
     void Start()
     {
-        Destroy(this.gameObject,2);
-    }
-
-    void Update()
-    {
-        
+        Destroy(this.gameObject,2f);
     }
 }
