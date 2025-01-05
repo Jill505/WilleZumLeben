@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4886508572646766549
 Transform:
   m_ObjectHideFlags: 0
@@ -137,8 +137,8 @@ MonoBehaviour:
   fireRate: 1
   recoilForce: 1.7
   recoilDuration: 0.2
-  shootingRange: 3.22
-  lineOfDetect: 4.93
+  chaseRange: 7.31
+  stopRange: 3.65
 --- !u!50 &1778018362365408809
 Rigidbody2D:
   serializedVersion: 4
