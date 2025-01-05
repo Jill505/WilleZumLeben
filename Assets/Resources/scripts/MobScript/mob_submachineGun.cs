@@ -15,9 +15,11 @@ public class mob_submachineGun : MobBase
    public float interval = 0.1f; // 每顆子彈之間的時間間隔
    [Range(0.4f,5f)] public float fireRate;
    private float nextFireTime;
+   private int currentShotIndex = 0; 
+   public float[] shotAngles = { -15f, 15f};
 
    [Header ("Recoil")]
-   public float recoilForce = 5f;     // 後座力大小
+   public float recoilForce = 5f;    
    public float recoilDuration = 0.5f;
    private bool isRecoiling = false;  
 
@@ -97,12 +99,15 @@ public class mob_submachineGun : MobBase
     }
     
     private IEnumerator ShootBullets()
-    {
+    {        
         for (int i = 0; i < bulletCount; i++)
         {
+            float currentAngle = shotAngles[currentShotIndex % shotAngles.Length]; // 循環使用方向
+            Quaternion offsetRotation = Quaternion.Euler(0, 0, currentAngle);
             var spawnedBullet =Instantiate(bullet, barrel.position, barrel.rotation);
-            spawnedBullet.AddForce(barrel.up * bulletspeed);
+            spawnedBullet.AddForce(offsetRotation * barrel.up * bulletspeed);
             Recoil();
+            currentShotIndex++;
             yield return new WaitForSeconds(interval);
         }
     }

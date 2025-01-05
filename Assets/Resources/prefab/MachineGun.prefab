@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5719964310522797948
 Transform:
   m_ObjectHideFlags: 0
@@ -199,10 +199,13 @@ MonoBehaviour:
   bulletCount: 10
   interval: 0.1
   fireRate: 3
+  shotAngles:
+  - -15
+  - 15
   recoilForce: 0.5
   recoilDuration: 0.2
   chaseRange: 17.33
-  stopRange: 2.87
+  stopRange: 5.45
 --- !u!1 &6175145259982879387
 GameObject:
   m_ObjectHideFlags: 0
